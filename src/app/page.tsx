@@ -6,6 +6,7 @@ import FlashProducts from "../../components/MainSections/FlashProducts";
 import GiftGuide from "../../components/MainSections/GiftGuide";
 import PhotoCard from "../../components/MainSections/PhotoCard";
 import CircleCard from "../../components/MainSections/CircleCard";
+import SuitCards from "../../components/MainSections/SuitCards";
 
 export default function HomePage() {
   return (
@@ -13,7 +14,7 @@ export default function HomePage() {
       <section>
         <Header />
       </section>
-      
+
       <section className="mt-4">
         <HeroCarousel />
       </section>
@@ -34,9 +35,9 @@ export default function HomePage() {
         <CircleCard />
       </section> }
 
-      {/* <section className="mt-2">
+      {<section className="mt-2">
         <SuitCards />
-      </section> */}
+      </section> }
 
       <Footer />
     </div>

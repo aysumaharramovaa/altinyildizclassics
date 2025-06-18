@@ -61,13 +61,13 @@ export default function FlashProducts() {
       image: "/flashproducts/product4.jpeg",
     },
     {
-      title: "Slim Fit Dar Kesim Bisiklet Yaka %100 Pamuk ısa Kollu Siyah...",
+      title: "Slim Fit Dar Kesim Bisiklet Yaka %100 Pamuk ısa Kollu Si...",
       price: 309.99,
       oldPrice: 303.99,
       image: "/flashproducts/product5.jpeg",
     },
     {
-      title: "Comfort Fit Rahat Kesim Düğmeli Yaka Casual Keten Yavruağzı...",
+      title: "Comfort Fit Rahat Kesim Düğmeli Yaka Casual Keten Yavru...",
       price: 879.32,
       oldPrice: 779.22,
       image: "/flashproducts/product6.jpeg",
@@ -80,56 +80,56 @@ export default function FlashProducts() {
     },
     {
       title:
-        "Slim Fit Rahat Kesim Beli Bağlamalı Yan Cepli Esnek Jogger Gri...",
+        "Slim Fit Rahat Kesim Beli Bağlamalı Yan Cepli Esnek Jogger...",
       price: 879.32,
       oldPrice: 779.22,
       image: "/flashproducts/product8.jpeg",
     },
     {
       title:
-        "Slim Fit Rahat Kesim Beli Bağlamalı Yan Cepli Esnek Jogger Gri...",
+        "Slim Fit Rahat Kesim Beli Bağlamalı Yan Cepli Esnek Jogger...",
       price: 879.32,
       oldPrice: 779.22,
       image: "/flashproducts/product9.jpeg",
     },
     {
       title:
-        "Slim Fit Rahat Kesim Beli Bağlamalı Yan Cepli Esnek Jogger Gri...",
+        "Slim Fit Rahat Kesim Beli Bağlamalı Yan Cepli Esnek Jogger...",
       price: 879.32,
       oldPrice: 779.22,
       image: "/flashproducts/product10.jpeg",
     },
     {
       title:
-        "Slim Fit Rahat Kesim Beli Bağlamalı Yan Cepli Esnek Jogger Gri...",
+        "Slim Fit Rahat Kesim Beli Bağlamalı Yan Cepli Esnek Jogger...",
       price: 879.32,
       oldPrice: 779.22,
       image: "/flashproducts/product11.jpeg",
     },
     {
       title:
-        "Slim Fit Rahat Kesim Beli Bağlamalı Yan Cepli Esnek Jogger Gri...",
+        "Slim Fit Rahat Kesim Beli Bağlamalı Yan Cepli Esnek Jogger...",
       price: 879.32,
       oldPrice: 779.22,
       image: "/flashproducts/product12.jpeg",
     },
     {
       title:
-        "Slim Fit Rahat Kesim Beli Bağlamalı Yan Cepli Esnek Jogger Gri...",
+        "Slim Fit Rahat Kesim Beli Bağlamalı Yan Cepli Esnek Jogger...",
       price: 879.32,
       oldPrice: 779.22,
       image: "/flashproducts/product13.jpeg",
     },
     {
       title:
-        "Slim Fit Rahat Kesim Beli Bağlamalı Yan Cepli Esnek Jogger Gri...",
+        "Slim Fit Rahat Kesim Beli Bağlamalı Yan Cepli Esnek Jogger...",
       price: 879.32,
       oldPrice: 779.22,
       image: "/flashproducts/product14.jpeg",
     },
     {
       title:
-        "Slim Fit Rahat Kesim Beli Bağlamalı Yan Cepli Esnek Jogger Gri...",
+        "Slim Fit Rahat Kesim Beli Bağlamalı Yan Cepli Esnek Jogger...",
       price: 879.32,
       oldPrice: 779.22,
       image: "/flashproducts/product15.jpeg",
