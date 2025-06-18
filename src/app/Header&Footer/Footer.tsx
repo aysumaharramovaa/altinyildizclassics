@@ -82,7 +82,8 @@ const Footer: React.FC = () => {
 
   return (
     <footer className="bg-white text-black py-10 px-4">
-    <div className="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-1 md:grid-cols-5 gap-6 text-sm text-center md:text-left">
+  <div className="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-5 gap-6 text-sm text-center md:text-left overflow-x-hidden">
+
         {footerLinks.map((section, index) => (
           <div key={index}>
             <button

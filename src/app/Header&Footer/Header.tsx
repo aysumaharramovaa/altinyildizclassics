@@ -1,4 +1,5 @@
-import React, { FC } from "react";
+"use client";
+import React, { FC, useState, useEffect } from "react";
 import { Menu } from "lucide-react";
 import {
   FiSearch,
@@ -13,15 +14,17 @@ type IconWithTooltipProps = {
   Icon: FC<{ size?: number; className?: string }>;
   label: string;
   badgeCount?: number;
+  size?: number;
 };
 
 const IconWithTooltip: FC<IconWithTooltipProps> = ({
   Icon,
   label,
   badgeCount = 0,
+  size = 5,
 }) => (
   <div className="relative group cursor-pointer">
-    <Icon size={20} className="text-gray-700" />
+    <Icon size={size} className="text-gray-700" />
     {badgeCount > 0 && (
       <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
         {badgeCount}
@@ -33,7 +36,26 @@ const IconWithTooltip: FC<IconWithTooltipProps> = ({
   </div>
 );
 
+function useIsMobile() {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    function handleResize() {
+      setIsMobile(window.innerWidth < 640);
+    }
+
+    handleResize();
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  return isMobile;
+}
+
 export default function Header() {
+  const isMobile = useIsMobile();
+
   return (
     <div>
       {/* scrolling banner */}
@@ -62,24 +84,43 @@ export default function Header() {
             </button>
 
             <div className="flex items-center gap-2">
-              <span className="text-2xl font-bold tracking-wider">
+              <span className="text-base sm:text-lg md:text-xl lg:text-2xl font-bold tracking-wider">
                 ALTINYILDIZ
               </span>
-              <span className="text-2xl">★</span>
-              <span className="text-2xl font-bold tracking-wider">
+              <span className="text-base sm:text-lg md:text-xl lg:text-2xl">
+                ★
+              </span>
+              <span className="text-base sm:text-lg md:text-xl lg:text-2xl font-bold tracking-wider">
                 CLASSICS
               </span>
             </div>
 
-            <div className="flex items-center gap-6">
-              <IconWithTooltip Icon={FiSearch} label="Ara" />
-              <IconWithTooltip Icon={FiHeart} label="Favorilerim" />
-              <IconWithTooltip Icon={FiEye} label="Sənin baxdıqların" />
-              <IconWithTooltip Icon={FiUser} label="Hesabım" />
+            <div className="flex items-center gap-2 md:gap-6">
+              <IconWithTooltip
+                Icon={FiSearch}
+                label="Ara"
+                size={isMobile ? 5 : 10}
+              />
+              <IconWithTooltip
+                Icon={FiHeart}
+                label="Favorilerim"
+                size={isMobile ? 5 : 10}
+              />
+              <IconWithTooltip
+                Icon={FiEye}
+                label="Sənin baxdıqların"
+                size={isMobile ? 5 : 10}
+              />
+              <IconWithTooltip
+                Icon={FiUser}
+                label="Hesabım"
+                size={isMobile ? 5 : 10}
+              />
               <IconWithTooltip
                 Icon={FiShoppingBag}
                 label="Səbətim"
                 badgeCount={0}
+                size={isMobile ? 5 : 10}
               />
             </div>
           </div>
