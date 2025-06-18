@@ -1,7 +1,7 @@
-import React from 'react';
-import Header from './Header&Footer/Header';
-import Footer from './Header&Footer/Footer';
-
+import React from "react";
+import Header from "./Header&Footer/Header";
+import Footer from "./Header&Footer/Footer";
+import { HeroCarousel } from "./MainSections/HeroCarousel";
 
 export default function HomePage() {
   return (
@@ -10,11 +10,11 @@ export default function HomePage() {
         <Header />
       </section>
 
-      {/* Hero Section
+      { /* hero carusel */}
       <section className="mt-4">
         <HeroCarousel />
       </section>
-
+      
       {/* Category Cards */}
       {/* <section className="mt-8">
         <FlashProducts />
@@ -38,7 +38,7 @@ export default function HomePage() {
         <SuitCards />
       </section> */}
 
-      <Footer/>
+      <Footer />
     </div>
   );
 }
