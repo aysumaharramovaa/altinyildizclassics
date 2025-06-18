@@ -3,6 +3,8 @@ import Header from "../../components/Header&Footer/Header";
 import Footer from "../../components/Header&Footer/Footer";
 import { HeroCarousel } from "../../components/MainSections/HeroCarousel";
 import FlashProducts from "../../components/MainSections/FlashProducts";
+import GiftGuide from "../../components/MainSections/GiftGuide";
+import PhotoCard from "../../components/MainSections/PhotoCard";
 
 export default function HomePage() {
   return (
@@ -22,14 +24,14 @@ export default function HomePage() {
       </section> }
 
       {/* Gift Guide */}
-      {/* <section className="p-0 m-0">
+      { <section className="p-0 m-0">
         <GiftGuide />
-      </section> */}
+      </section> }
 
       {/* Photo Card */}
-      {/* <section className="mt-2">
+      {<section className="mt-2">
         <PhotoCard />
-      </section> */}
+      </section> }
 
       {/* <section className="mt-2">
         <CircleCard />
