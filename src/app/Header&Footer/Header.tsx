@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import {Menu} from "lucide-react";
+import { Menu } from "lucide-react";
 import {
   FiSearch,
   FiHeart,
@@ -89,12 +89,12 @@ export default function Header() {
       {/* Navigation */}
       <nav className="bg-white border-b">
         <div className="container mx-auto px-4">
-          <div className="flex items-center justify-center gap-6 py-4 text-xs">
+          <div className="hidden lg:flex items-center justify-center gap-6 py-4 text-xs">
             <a href="#" className="text-red-500 font-medium">
               EN BABA BAYRAM
             </a>
             |
-            <Link href={`/suit`}className="text-gray-700 hover:text-red-500">
+            <Link href={`/suit`} className="text-gray-700 hover:text-red-500">
               Takım Elbise
             </Link>
             |
