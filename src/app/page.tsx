@@ -1,5 +1,6 @@
 import React from 'react';
 import Header from './Header&Footer/Header';
+import Footer from './Header&Footer/Footer';
 
 
 export default function HomePage() {
@@ -37,7 +38,7 @@ export default function HomePage() {
         <SuitCards />
       </section> */}
 
-      {/* <Footer /> */} 
+      <Footer/>
     </div>
   );
 }
