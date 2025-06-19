@@ -135,7 +135,10 @@ export default function Header() {
               EN BABA BAYRAM
             </a>
             |
-            <Link href={`/suit`} className="text-gray-700 hover:text-red-500">
+            <Link
+              href="/suit"
+              className="text-gray-700 hover:text-red-500"
+            >
               Takım Elbise
             </Link>
             |
