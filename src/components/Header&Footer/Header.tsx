@@ -58,22 +58,6 @@ export default function Header() {
 
   return (
     <div>
-      {/* scrolling banner */}
-      <div className="bg-red-500 text-white py-2 overflow-hidden">
-        <div className="animate-scroll whitespace-nowrap">
-          <span className="mx-8">EN BABA BAYRAM</span>
-          <span className="mx-8">ŞANSLI SAATLER</span>
-          <span className="mx-8">EN BABA BAYRAM</span>
-          <span className="mx-8">ŞANSLI SAATLER</span>
-          <span className="mx-8">EN BABA BAYRAM</span>
-          <span className="mx-8">ŞANSLI SAATLER</span>
-          <span className="mx-8">EN BABA BAYRAM</span>
-          <span className="mx-8">ŞANSLI SAATLER</span>
-          <span className="mx-8">EN BABA BAYRAM</span>
-          <span className="mx-8">ŞANSLI SAATLER</span>
-        </div>
-      </div>
-
       {/* Header */}
       <header className="bg-white border-b">
         <div className="container mx-auto px-4 py-4">
@@ -82,18 +66,19 @@ export default function Header() {
               <Menu size={20} />
               <span className="text-sm font-medium">MENÜ</span>
             </button>
-
-            <div className="flex items-center gap-2">
-              <span className="text-base sm:text-lg md:text-xl lg:text-2xl font-bold tracking-wider">
-                ALTINYILDIZ
-              </span>
-              <span className="text-base sm:text-lg md:text-xl lg:text-2xl">
-                ★
-              </span>
-              <span className="text-base sm:text-lg md:text-xl lg:text-2xl font-bold tracking-wider">
-                CLASSICS
-              </span>
-            </div>
+            <Link href="/" passHref>
+              <div className="flex items-center gap-2">
+                <span className="text-base sm:text-lg md:text-xl lg:text-2xl font-bold tracking-wider">
+                  ALTINYILDIZ
+                </span>
+                <span className="text-base sm:text-lg md:text-xl lg:text-2xl">
+                  ★
+                </span>
+                <span className="text-base sm:text-lg md:text-xl lg:text-2xl font-bold tracking-wider">
+                  CLASSICS
+                </span>
+              </div>
+            </Link>
 
             <div className="flex items-center gap-2 md:gap-6">
               <IconWithTooltip
@@ -135,10 +120,7 @@ export default function Header() {
               EN BABA BAYRAM
             </a>
             |
-            <Link
-              href="/suit"
-              className="text-gray-700 hover:text-red-500"
-            >
+            <Link href="/suit" className="text-gray-700 hover:text-red-500">
               Takım Elbise
             </Link>
             |

@@ -1,64 +1,100 @@
 import React from "react";
+import { products } from "@/app/products";
+import { Rate } from "antd";
+import Header from "@/components/Header&Footer/Header";
 
-type ProductCardProps = {
+type Product = {
   title: string;
   price: number;
-  oldPrice?: number;
+  oldPrice?: number | null;
   image: string;
   ratingCount: number;
+  id: number;
 };
 
-const ProductCard: React.FC<ProductCardProps> = ({
-  title,
-  price,
-  oldPrice,
-  image,
-  ratingCount,
-}) => {
+type ProductCardProps = {
+  product: Product;
+};
+
+const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   return (
-    <div className="group relative bg-white rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 cursor-pointer">
-      <div className="overflow-hidden rounded-t-lg h-64">
+    <div className="flex max-w-5xl mx-auto bg-white rounded-lg shadow-lg overflow-hidden h-full">
+      <div className="w-1/2 bg-gray-100">
         <img
-          src={image}
-          alt={title}
-          className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-300"
-          loading="lazy"
+          src={product.image}
+          alt={product.title}
+          className="object-cover w-full h-full"
         />
       </div>
 
-      <div className="p-4 flex flex-col justify-between h-36">
-        <h3 className="text-sm font-semibold text-gray-900 line-clamp-2">
-          {title}
-        </h3>
+      <div className="w-1/2 p-8 flex flex-col justify-between">
+        <div>
+          <h2 className="text-2xl font-semibold mb-3 text-center">
+            {product.title}
+          </h2>
+          <p className="text-gray-600 mb-1 text-center">Elbise</p>
+          <p className="text-gray-500 mb-4 text-center">ET3024200071LAC</p>
 
-        <div className="mt-3 flex items-center justify-between text-sm">
-          <div className="flex items-center space-x-3">
-            <span className="font-bold text-blue-600">
-              ${typeof price === "number" ? price.toFixed(2) : "0.00"}
+          <div className="flex items-center gap-2 mb-4">
+            <Rate allowHalf disabled defaultValue={product.ratingCount / 10} />
+            <span className="text-gray-600">
+              {product.ratingCount} Değerlendirme
             </span>
+          </div>
 
-            {oldPrice && typeof oldPrice === "number" && oldPrice > price && (
-              <span className="text-gray-400 line-through">
-                ${oldPrice.toFixed(2)}
+          <div className="flex items-center gap-3 mb-4">
+            <span className="text-3xl font-bold text-black">
+              {product.price.toLocaleString("tr-TR", {
+                style: "currency",
+                currency: "TRY",
+              })}
+            </span>
+            {product.oldPrice && (
+              <span className="line-through text-gray-400">
+                {product.oldPrice.toLocaleString("tr-TR", {
+                  style: "currency",
+                  currency: "TRY",
+                })}
               </span>
             )}
           </div>
 
-          <div className="flex items-center space-x-1 text-yellow-500">
-            {/* Simple star icon with rating count */}
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-4 w-4 fill-current"
-              viewBox="0 0 20 20"
-            >
-              <path d="M10 15l-5.878 3.09 1.123-6.545L.49 6.91l6.564-.955L10 0l2.946 5.955 6.564.955-4.755 4.635 1.123 6.545z" />
-            </svg>
-            <span className="text-gray-600 font-medium">{ratingCount}</span>
+          <p className="text-green-600 font-semibold mb-4">Sepette Az Öde</p>
+          <div className="mb-4">
+            <label className="block mb-1 font-medium">Beden Seçin</label>
+            <select className="border border-gray-300 rounded px-3 py-2 w-full">
+              <option>Bedenimi Bul</option>
+              <option>38N</option>
+              <option>40N</option>
+              <option>42N</option>
+              <option>44N</option>
+              <option>46N</option>
+              <option>48N</option>
+              <option>50N</option>
+              <option>52N</option>
+              <option>54N</option>
+            </select>
           </div>
+
+          <button className="bg-black text-white py-3 rounded w-full hover:bg-gray-800 transition">
+            Sepete Ekle
+          </button>
+        </div>
+        <div className="mt-6 text-gray-500 text-sm border-t pt-4">
+          <p>
+            Beden Kılavuzu, kumaş ve yıkama talimatları burada gösterilebilir.
+          </p>
         </div>
       </div>
     </div>
   );
 };
+export default function Page({ params }: { params: { id: string } }) {
+  const product = products.find((p) => p.id === Number(params.id));
 
-export default ProductCard;
+  if (!product) {
+    return <div>Ürün bulunamadı.</div>;
+  }
+
+  return <ProductCard product={product} />;
+}

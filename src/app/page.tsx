@@ -1,5 +1,6 @@
 import Footer from "@/components/Header&Footer/Footer";
 import Header from "@/components/Header&Footer/Header";
+import ScrollingBanner from "@/components/Header&Footer/ScrollingBanner";
 import CircleCard from "@/components/MainSections/CircleCard";
 import FlashProducts from "@/components/MainSections/FlashProducts";
 import GiftGuide from "@/components/MainSections/GiftGuide";
@@ -11,27 +12,19 @@ import React from "react";
 export default function HomePage() {
   return (
     <>
+      <ScrollingBanner />
       <Header />
-
-      <section className="mt-4">
-        <HeroCarousel />
-      </section>
-
-      <section className="mt-8">
-        <FlashProducts />
-      </section>
-      <section className="p-0 m-0">
-        <GiftGuide />
-      </section>
-      <section className="mt-2">
-        <PhotoCard />
-      </section>
-      <section className="mt-2">
-        <CircleCard />
-      </section>
-      <section className="mt-2">
-        <SuitCards />
-      </section>
+      
+      <main>
+        <section className="mt-2">
+          <HeroCarousel />
+          <FlashProducts />
+          <GiftGuide />
+          <PhotoCard />
+          <CircleCard />
+          <SuitCards />
+        </section>
+      </main>
 
       <Footer />
     </>

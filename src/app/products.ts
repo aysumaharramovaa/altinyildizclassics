@@ -11,7 +11,7 @@ export const products = [
   {
     title: "Slim Fit Dar Kesim Mono Yaka Lacivert Takm Elbise",
     price: 3333.99,
-    oldPrice: 453.99,
+    oldPrice: null,
     image: "/suit/product (2).jpeg",
     createdAt: "2023-07-12",
     salesCount: 300,
@@ -31,7 +31,7 @@ export const products = [
   {
     title: "Slim Fit Dar Kesim Mono Yaka Desenli Gri Yelekli Takm Elbise",
     price: 6719.32,
-    oldPrice: 679.99,
+    oldPrice: null,
     image: "/suit/product (4).jpeg",
     createdAt: "2023-08-01",
     salesCount: 250,
@@ -42,7 +42,7 @@ export const products = [
     title:
       "Su Geçirmez Slim Fit Dar Kesim Mono Yaka ünlü Yelekli Nano Siyah Yelekli Takım Elbise",
     price: 5743.5,
-    oldPrice: 773.99,
+    oldPrice: null,
     image: "/suit/product (5).jpeg",
     createdAt: "2023-06-10",
     salesCount: 150,
@@ -52,7 +52,7 @@ export const products = [
   {
     title: "Ekstra Slim Fit Dar Kesim Kirlangıç Yaka Siyah Takım Elbise",
     price: 4516.67,
-    oldPrice: 453.99,
+    oldPrice: null,
     image: "/suit/product (6).jpeg",
     createdAt: "2023-07-12",
     salesCount: 300,
@@ -62,7 +62,7 @@ export const products = [
   {
     title: "Slim Fit Dar Kesim Mono Yaka Lacivert Takm Elbise",
     price: 3333.99,
-    oldPrice: 453.99,
+    oldPrice: null,
     image: "/suit/product (7).jpeg",
     createdAt: "2023-07-12",
     salesCount: 300,
@@ -112,6 +112,7 @@ export const products = [
   {
     title: "%100 Pamuk Oxford Slim Fit Dar Kesim Düğmeli Yaka Beyaz...",
     price: 3333.99,
+    oldPrice: null,
     image: "/suit/product (1).jpeg",
     createdAt: "2023-06-10",
     salesCount: 150,
@@ -121,7 +122,7 @@ export const products = [
   {
     title: "Slim Fit Dar Kesim Mono Yaka Lacivert Takm Elbise",
     price: 3333.99,
-    oldPrice: 453.99,
+    oldPrice: null,
     image: "/suit/product (2).jpeg",
     createdAt: "2023-07-12",
     salesCount: 300,
