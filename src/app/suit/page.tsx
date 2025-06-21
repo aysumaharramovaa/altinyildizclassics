@@ -6,37 +6,14 @@ import Header from "@/components/Header&Footer/Header";
 import { Rate } from "antd";
 
 const menuItems = [
-  "Yeni Sezon",
-  "Giyim",
-  "Tişört",
-  "Her Daim Basic",
-  "Şort",
-  "Mayo / Deniz Şortu",
-  "Gömlek",
-  "Pantolon",
-  "Takım Elbise",
-  "Kombinli Takım Elbise",
-  "Klasik Takım Elbise",
-  "Nano Takım Elbise",
-  "Yelekli Takım Elbise",
-  "Yelekli Takm Elbise",
-  "Sweatshirt",
-  "Smokin / Damatlik",
-  "Esofman",
-  "Triko / Kazak",
-  "DIS Giyim",
-  "Polar",
-  "IQ Giyim",
-  "Kadin Giyim",
-  "Online Exclusive",
-  "Coklu Paket Urünler",
-  "Ayakkabı",
-  "Aksesuar",
-  "Kampanyalar",
-  "AC x Burak ÖZGivit",
-  "Koleksiyon",
-  "Mega Outlet",
-  "AC Home",
+  "Yeni Sezon", "Giyim", "Tişört", "Her Daim Basic", "Şort",
+  "Mayo / Deniz Şortu", "Gömlek", "Pantolon", "Takım Elbise",
+  "Kombinli Takım Elbise", "Klasik Takım Elbise", "Nano Takım Elbise",
+  "Yelekli Takım Elbise", "Yelekli Takm Elbise", "Sweatshirt",
+  "Smokin / Damatlik", "Esofman", "Triko / Kazak", "DIS Giyim", "Polar",
+  "IQ Giyim", "Kadin Giyim", "Online Exclusive", "Coklu Paket Urünler",
+  "Ayakkabı", "Aksesuar", "Kampanyalar", "AC x Burak ÖZGivit",
+  "Koleksiyon", "Mega Outlet", "AC Home",
 ];
 
 const sortOptions = [
@@ -76,7 +53,12 @@ export default function ProductLayout() {
   return (
     <>
       <Header />
-      <div className="min-h-screen flex bg-gray-50 font-sans text-gray-800">
+      <p className="text-sm pl-5 text-gray-600 mt-1">
+        Ana Sayfa / Giyim / Takım Elbise
+      </p>
+
+      <div className="min-h-screen flex font-sans text-gray-800">
+        {/* Sol menu */}
         <aside className="w-48 h-screen overflow-y-auto flex flex-col">
           <nav className="flex flex-col mt-4 px-4 space-y-1">
             {menuItems.map((item) => (
@@ -96,9 +78,10 @@ export default function ProductLayout() {
           </nav>
         </aside>
 
+        {/* Məhsullar və filter */}
         <main className="flex-1 p-5 overflow-auto">
           <div className="px-2 pt-4 flex items-center gap-4">
-            {/* Sıralama label və select */}
+            {/* Sıralama seçimi */}
             <div>
               <label
                 htmlFor="sort-select"
@@ -120,7 +103,7 @@ export default function ProductLayout() {
               </select>
             </div>
 
-            {/* Grid sayı seçimləri */}
+            {/* Grid sayı seçimi */}
             <div className="flex items-center gap-2 mt-6">
               {[2, 3, 4].map((num) => (
                 <button
@@ -138,7 +121,16 @@ export default function ProductLayout() {
             </div>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 mt-6">
+          {/* Məhsul kartları - dinamik grid */}
+          <div
+            className={`grid gap-8 mt-6 ${
+              columns === 2
+                ? "grid-cols-1 sm:grid-cols-2"
+                : columns === 3
+                ? "grid-cols-1 sm:grid-cols-2 md:grid-cols-3"
+                : "grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
+            }`}
+          >
             {sortedProducts.map((product, idx) => {
               const images = [
                 product.image,
@@ -168,6 +160,7 @@ export default function ProductLayout() {
                     )}
                   </div>
 
+                  {/* Thumbnail navigasiyası */}
                   <div className="flex justify-center mt-2 space-x-2">
                     {images.map((_, i) => (
                       <div
@@ -182,6 +175,7 @@ export default function ProductLayout() {
                     ))}
                   </div>
 
+                  {/* Məhsul info */}
                   <div className="mt-3 p-3 rounded-b-lg">
                     <h3 className="text-xs font-light text-gray-900 mb-1 line-clamp-2">
                       {product.title}
@@ -195,7 +189,7 @@ export default function ProductLayout() {
                           : 0
                       }
                     />
-                    <div className="flex items-center space-x-2 text-xs">
+                    <div className="flex items-center space-x-2 text-xs mt-1">
                       <span className="text-black font-semibold">
                         {typeof product.price === "number"
                           ? `$${product.price.toFixed(2)}`

@@ -26,8 +26,8 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   return (
     <>
     <Header />
-    <div className="flex max-w-6xl mx-auto bg-white rounded-lg shadow-lg overflow-hidden h-full">
 
+    <div className="flex max-w-6xl mx-auto bg-white rounded-lg shadow-lg overflow-hidden h-full">
       <div className="w-1/2p-4 grid grid-cols-2 gap-4">
         {images.map((img, index) => (
           <img
