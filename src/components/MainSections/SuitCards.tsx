@@ -2,7 +2,7 @@
 import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHouse, faCloud } from "@fortawesome/free-solid-svg-icons";
-
+import { useRouter } from "next/navigation";
 const Wrapper = styled.div`
   width: 100%;
   overflow-x: hidden;
@@ -47,25 +47,55 @@ const StyledImageLeft3 = styled(StyledImage)`
     width: 33.33%;
   }
 `;
+export default function GiftGuide() {
+  const router = useRouter();
 
-export default function SuitCards() {
+  const handleClick = () => {
+    router.push("/suit");
+  };
+
   return (
     <Wrapper>
       <Container>
-        <StyledImage src="/suitcard/takım1.jpeg" alt="Suit Card 1" />
-        <StyledImage src="/suitcard/takim2.jpeg" alt="Suit Card 2" />
+        <StyledImage
+          src="/suitcard/takım1.jpeg"
+          alt="Suit Card 1"
+          onClick={handleClick}
+        />
+        <StyledImage
+          src="/suitcard/takim2.jpeg"
+          alt="Suit Card 2"
+          onClick={handleClick}
+        />
       </Container>
 
       <StyledImageLeft src="stiliniyansit.jpg" />
-      <StyledImageLeft src="/suitcard/takım3.jpg" alt="Suit Card 3" />
+      <StyledImageLeft
+        src="/suitcard/takım3.jpg"
+        alt="Suit Card 3"
+        onClick={handleClick}
+      />
 
       <Container>
         <StyledImageRight2 src="/suitcard/aksesuar.jpg" alt="Aksessuar" />
         <StyledImageLeft3 src="/suitcard/ayakkabi.jpg" alt="Ayakkabi" />
         <StyledImageRight2 src="/suitcard/icgiyim.jpg" alt="Ic giyim" />
       </Container>
-      <StyledImageLeft src="/suitcard/onlineexclusive.jpg" />
-      <StyledImageLeft src="/suitcard/hemenindir.jpeg" />
+      <StyledImageLeft
+        src="/suitcard/onlineexclusive.jpg"
+        onClick={handleClick}
+      />
+      <StyledImageLeft
+        src="/suitcard/hemenindir.jpeg"
+        onClick={() =>
+          window.open(
+            "https://apps.apple.com/tr/app/alt%C4%B1ny%C4%B1ld%C4%B1z-classics/id1483910505",
+            "_blank"
+          )
+        }
+        className="cursor-pointer"
+      />
+
       <h2 className="text-center text-lg font-medium flex flex-wrap justify-center gap-4">
         <span className="flex items-center mr-5 min-w-[200px]">
           <FontAwesomeIcon icon={faHouse} className="mr-2" />

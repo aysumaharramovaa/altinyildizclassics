@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import { useKeenSlider } from "keen-slider/react";
 import "keen-slider/keen-slider.min.css";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 const images = [
   "/herocarousel/hero-bg.jpeg",
@@ -20,20 +21,29 @@ const images = [
 
 export function HeroCarousel() {
   const [currentSlide, setCurrentSlide] = useState(0);
+  const router = useRouter();
 
   const [sliderRef, instanceRef] = useKeenSlider<HTMLDivElement>({
     loop: true,
     slides: { perView: 1 },
     slideChanged(slider) {
-      setCurrentSlide(slider.track.details.rel); 
+      setCurrentSlide(slider.track.details.rel);
     },
   });
+
+  const handleClick = () => {
+    router.push("/suit");
+  };
 
   return (
     <div className="relative">
       <div ref={sliderRef} className="keen-slider">
         {images.map((src, index) => (
-          <div key={index} className="keen-slider__slide relative">
+          <div
+            key={index}
+            className="keen-slider__slide relative cursor-pointer"
+            onClick={handleClick} 
+          >
             <img
               src={src}
               alt={`Hero ${index + 1}`}
@@ -62,9 +72,7 @@ export function HeroCarousel() {
           <span
             key={index}
             className={`h-[4px] w-6 rounded-full transition-all duration-300 ${
-              currentSlide === index
-                ? "bg-white"
-                : "bg-white/40"
+              currentSlide === index ? "bg-white" : "bg-white/40"
             }`}
           />
         ))}
