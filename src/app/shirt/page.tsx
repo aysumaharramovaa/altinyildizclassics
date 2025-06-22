@@ -1,9 +1,10 @@
 "use client";
 import React, { useState, useMemo } from "react";
-import { products } from "@/app/products";
+import { products } from "@/app/shirt/products";
 import Link from "next/link";
 import Header from "@/components/Header&Footer/Header";
 import { Rate } from "antd";
+
 
 const menuItems = [
   "Yeni Sezon", "Giyim", "Tişört", "Her Daim Basic", "Şort",
@@ -15,6 +16,8 @@ const menuItems = [
   "Ayakkabı", "Aksesuar", "Kampanyalar", "AC x Burak ÖZGivit",
   "Koleksiyon", "Mega Outlet", "AC Home",
 ];
+
+
 
 const sortOptions = [
   { value: "0", label: "Editör Sıralaması" },
@@ -54,7 +57,7 @@ export default function ProductLayout() {
     <>
       <Header />
       <p className="text-sm pl-5 text-gray-600 mt-1">
-        Ana Sayfa / Giyim / Takım Elbise
+        Ana Sayfa / Giyim / Gömlek
       </p>
 
       <div className="min-h-screen flex font-sans text-gray-800">

@@ -124,9 +124,9 @@ export default function Header() {
               Takım Elbise
             </Link>
             |
-            <a href="#" className="text-gray-700 hover:text-red-500">
+            <Link href="/shirt" className="text-gray-700 hover:text-red-500">
               Gömlek
-            </a>
+            </Link>
             |
             <a href="#" className="text-gray-700 hover:text-red-500">
               Basic Tişört
