@@ -1,6 +1,6 @@
 "use client";
 import React, { useState, useMemo } from "react";
-import { products } from "@/app/products";
+import { products } from "@/app/suit/products";
 import Link from "next/link";
 import Header from "@/components/Header&Footer/Header";
 import { Rate } from "antd";

@@ -1,6 +1,6 @@
 "use client";
 import React, { useState, useMemo } from "react";
-import { products } from "@/app/shirt/products";
+import { shirts } from "@/app/shirt/data";
 import Link from "next/link";
 import Header from "@/components/Header&Footer/Header";
 import { Rate } from "antd";
@@ -33,23 +33,23 @@ export default function ProductLayout() {
   const [activeSort, setActiveSort] = useState(sortOptions[0].value);
   const [columns, setColumns] = useState(4);
 
-  const sortedProducts = useMemo(() => {
+  const sortedshirt = useMemo(() => {
     switch (activeSort) {
       case "10":
-        return [...products].sort((a, b) => a.price - b.price);
+        return [...shirts].sort((a, b) => a.price - b.price);
       case "11":
-        return [...products].sort((a, b) => b.price - a.price);
+        return [...shirts].sort((a, b) => b.price - a.price);
       case "15":
-        return [...products].sort(
+        return [...shirts].sort(
           (a, b) =>
             new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
         );
       case "20":
-        return [...products].sort((a, b) => b.salesCount - a.salesCount);
+        return [...shirts].sort((a, b) => b.salesCount - a.salesCount);
       case "25":
-        return [...products].sort((a, b) => b.ratingCount - a.ratingCount);
+        return [...shirts].sort((a, b) => b.ratingCount - a.ratingCount);
       default:
-        return products;
+        return shirts;
     }
   }, [activeSort]);
 
@@ -128,29 +128,29 @@ export default function ProductLayout() {
                 : "grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
             }`}
           >
-            {sortedProducts.map((product, idx) => {
+            {sortedshirt.map((shirts, idx) => {
               const images = [
-                product.image,
-                product.image1,
-                product.image2,
-                product.image3,
+                shirts.image,
+                shirts.image1,
+                shirts.image2,
+                shirts.image3,
               ];
               const [selectedImage, setSelectedImage] = useState(0);
 
               return (
                 <Link
-                  href={`/suit/${product.id}`}
-                  key={`${product.id}-${idx}`}
+                  href={`/shirt/${shirts.id}`}
+                  key={`${shirts.id}-${idx}`}
                   className="block group"
                 >
                   <div className="bg-white rounded-lg shadow-md overflow-hidden cursor-pointer hover:shadow-xl transition w-full h-60 relative">
                     <img
                       src={images[selectedImage]}
-                      alt={product.title}
+                      alt={shirts.title}
                       className="w-full h-full object-cover object-top rounded-t-lg transition-transform group-hover:scale-105"
                       loading="lazy"
                     />
-                    {product.oldPrice && product.oldPrice > product.price && (
+                    {shirts.oldPrice && shirts.oldPrice > shirts.price && (
                       <span className="absolute top-2 left-2 bg-red-500 text-white text-xs font-bold px-2 py-1 rounded">
                         İndirim
                       </span>
@@ -173,27 +173,27 @@ export default function ProductLayout() {
 
                   <div className="mt-3 p-3 rounded-b-lg">
                     <h3 className="text-xs font-light text-gray-900 mb-1 line-clamp-2">
-                      {product.title}
+                      {shirts.title}
                     </h3>
                     <Rate
                       allowHalf
                       disabled
                       defaultValue={
-                        typeof product.ratingCount === "number"
-                          ? product.ratingCount / 10
+                        typeof shirts.ratingCount === "number"
+                          ? shirts.ratingCount / 10
                           : 0
                       }
                     />
                     <div className="flex items-center space-x-2 text-xs mt-1">
                       <span className="text-black font-semibold">
-                        {typeof product.price === "number"
-                          ? `$${product.price.toFixed(2)}`
+                        {typeof shirts.price === "number"
+                          ? `$${shirts.price.toFixed(2)}`
                           : "Fiyat Yok"}
                       </span>
-                      {product.oldPrice && product.oldPrice > product.price && (
+                      {shirts.oldPrice && shirts.oldPrice > shirts.price && (
                         <span className="text-gray-400 line-through">
-                          {typeof product.oldPrice === "number"
-                            ? `$${product.oldPrice.toFixed(2)}`
+                          {typeof shirts.oldPrice === "number"
+                            ? `$${shirts.oldPrice.toFixed(2)}`
                             : ""}
                         </span>
                       )}

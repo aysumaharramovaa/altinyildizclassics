@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import { products } from "@/app/products";
+import { products } from "@/app/suit/products";
 import { Rate } from "antd";
 import Header from "@/components/Header&Footer/Header";
 

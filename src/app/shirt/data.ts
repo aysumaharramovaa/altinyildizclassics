@@ -1,4 +1,4 @@
-export const products = [
+export const shirts = [
   {
     title: "%IOO Pamuk Flamll Oxford Slim Fit Dar Kesim Dugmeli Yaka Beyaz Gömlek",
     price: 3333.99,
