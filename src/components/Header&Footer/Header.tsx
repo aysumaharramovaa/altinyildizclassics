@@ -110,13 +110,14 @@ export default function Header() {
                   badgeCount={favorites.length}
                 />
               </Link>
-              
-              <IconWithTooltip
-                Icon={FiShoppingBag}
-                label="Sebetim"
-                badgeCount={0}
-                size={isMobile ? 5 : 10}
-              />
+              <Link href="/basket">
+                <IconWithTooltip
+                  Icon={FiShoppingBag}
+                  label="Sebetim"
+                  badgeCount={0}
+                  size={isMobile ? 5 : 10}
+                />
+              </Link>
             </div>
           </div>
         </div>
