@@ -1,23 +1,45 @@
 "use client";
 import React, { useState, useMemo } from "react";
-import { shirts } from "@/app/shirt/data";
+import { productsshirts } from "@/app/shirt/products";
 import Link from "next/link";
 import Header from "@/components/Header&Footer/Header";
 import { Rate } from "antd";
-
+import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
+import { useFavorites } from "@/components/Header&Footer/FavoritesContext";
 
 const menuItems = [
-  "Yeni Sezon", "Giyim", "Tişört", "Her Daim Basic", "Şort",
-  "Mayo / Deniz Şortu", "Gömlek", "Pantolon", "Takım Elbise",
-  "Kombinli Takım Elbise", "Klasik Takım Elbise", "Nano Takım Elbise",
-  "Yelekli Takım Elbise", "Yelekli Takm Elbise", "Sweatshirt",
-  "Smokin / Damatlik", "Esofman", "Triko / Kazak", "DIS Giyim", "Polar",
-  "IQ Giyim", "Kadin Giyim", "Online Exclusive", "Coklu Paket Urünler",
-  "Ayakkabı", "Aksesuar", "Kampanyalar", "AC x Burak ÖZGivit",
-  "Koleksiyon", "Mega Outlet", "AC Home",
+  "Yeni Sezon",
+  "Giyim",
+  "Tişört",
+  "Her Daim Basic",
+  "Şort",
+  "Mayo / Deniz Şortu",
+  "Gömlek",
+  "Pantolon",
+  "Takım Elbise",
+  "Kombinli Takım Elbise",
+  "Klasik Takım Elbise",
+  "Nano Takım Elbise",
+  "Yelekli Takım Elbise",
+  "Yelekli Takm Elbise",
+  "Sweatshirt",
+  "Smokin / Damatlik",
+  "Esofman",
+  "Triko / Kazak",
+  "DIS Giyim",
+  "Polar",
+  "IQ Giyim",
+  "Kadin Giyim",
+  "Online Exclusive",
+  "Coklu Paket Urünler",
+  "Ayakkabı",
+  "Aksesuar",
+  "Kampanyalar",
+  "AC x Burak ÖZGivit",
+  "Koleksiyon",
+  "Mega Outlet",
+  "AC Home",
 ];
-
-
 
 const sortOptions = [
   { value: "0", label: "Editör Sıralaması" },
@@ -32,24 +54,24 @@ export default function ProductLayout() {
   const [activeMenu, setActiveMenu] = useState(menuItems[0]);
   const [activeSort, setActiveSort] = useState(sortOptions[0].value);
   const [columns, setColumns] = useState(4);
+  const { favorites, toggleFavorite } = useFavorites();
 
-  const sortedshirt = useMemo(() => {
+  const sortedProducts = useMemo(() => {
     switch (activeSort) {
       case "10":
-        return [...shirts].sort((a, b) => a.price - b.price);
+        return [...productsshirts].sort((a, b) => a.price - b.price);
       case "11":
-        return [...shirts].sort((a, b) => b.price - a.price);
+        return [...productsshirts].sort((a, b) => b.price - a.price);
       case "15":
-        return [...shirts].sort(
-          (a, b) =>
-            new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+        return [...productsshirts].sort(
+          (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
         );
       case "20":
-        return [...shirts].sort((a, b) => b.salesCount - a.salesCount);
+        return [...productsshirts].sort((a, b) => b.salesCount - a.salesCount);
       case "25":
-        return [...shirts].sort((a, b) => b.ratingCount - a.ratingCount);
+        return [...productsshirts].sort((a, b) => b.ratingCount - a.ratingCount);
       default:
-        return shirts;
+        return productsshirts;
     }
   }, [activeSort]);
 
@@ -57,7 +79,7 @@ export default function ProductLayout() {
     <>
       <Header />
       <p className="text-sm pl-5 text-gray-600 mt-1">
-        Ana Sayfa / Giyim / Gömlek
+        Ana Sayfa / Giyim / Gömlek 
       </p>
 
       <div className="min-h-screen flex font-sans text-gray-800">
@@ -68,9 +90,7 @@ export default function ProductLayout() {
                 key={item}
                 onClick={() => setActiveMenu(item)}
                 className={`py-3 px-4 rounded-lg text-left text-black text-sm ${
-                  activeMenu === item
-                    ? "underline font-semibold"
-                    : "hover:underline"
+                  activeMenu === item ? "underline font-semibold" : "hover:underline"
                 } transition`}
                 type="button"
               >
@@ -128,29 +148,47 @@ export default function ProductLayout() {
                 : "grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
             }`}
           >
-            {sortedshirt.map((shirts, idx) => {
+            {sortedProducts.map((productsshirts, idx) => {
               const images = [
-                shirts.image,
-                shirts.image1,
-                shirts.image2,
-                shirts.image3,
+                productsshirts.image,
+                productsshirts.image1,
+                productsshirts.image2,
+                productsshirts.image3,
               ];
               const [selectedImage, setSelectedImage] = useState(0);
 
+              // Favoritdirmi yoxlayırıq
+              const isFavorite = favorites.includes(productsshirts.id);
+
               return (
                 <Link
-                  href={`/shirt/${shirts.id}`}
-                  key={`${shirts.id}-${idx}`}
+                  href={`/shirt/${productsshirts.id}`}
+                  key={`${productsshirts.id}-${idx}`}
                   className="block group"
                 >
                   <div className="bg-white rounded-lg shadow-md overflow-hidden cursor-pointer hover:shadow-xl transition w-full h-60 relative">
                     <img
                       src={images[selectedImage]}
-                      alt={shirts.title}
+                      alt={productsshirts.title}
                       className="w-full h-full object-cover object-top rounded-t-lg transition-transform group-hover:scale-105"
                       loading="lazy"
                     />
-                    {shirts.oldPrice && shirts.oldPrice > shirts.price && (
+                    <button
+                      onClick={(e) => {
+                        e.preventDefault(); // Linkin işini kəsirik ki səhifə dəyişməsin
+                        toggleFavorite(productsshirts.id);
+                      }}
+                      className="absolute top-2 right-2 bg-white p-1 rounded-full shadow hover:bg-gray-100 transition z-10"
+                      aria-label={isFavorite ? "Favoritdən sil" : "Favoritə əlavə et"}
+                    >
+                      {isFavorite ? (
+                        <AiFillHeart className="text-red-500 w-5 h-5" />
+                      ) : (
+                        <AiOutlineHeart className="text-gray-500 w-5 h-5" />
+                      )}
+                    </button>
+
+                    {productsshirts.oldPrice && productsshirts.oldPrice > productsshirts.price && (
                       <span className="absolute top-2 left-2 bg-red-500 text-white text-xs font-bold px-2 py-1 rounded">
                         İndirim
                       </span>
@@ -173,27 +211,27 @@ export default function ProductLayout() {
 
                   <div className="mt-3 p-3 rounded-b-lg">
                     <h3 className="text-xs font-light text-gray-900 mb-1 line-clamp-2">
-                      {shirts.title}
+                      {productsshirts.title}
                     </h3>
                     <Rate
                       allowHalf
                       disabled
                       defaultValue={
-                        typeof shirts.ratingCount === "number"
-                          ? shirts.ratingCount / 10
+                        typeof productsshirts.ratingCount === "number"
+                          ? productsshirts.ratingCount / 10
                           : 0
                       }
                     />
                     <div className="flex items-center space-x-2 text-xs mt-1">
                       <span className="text-black font-semibold">
-                        {typeof shirts.price === "number"
-                          ? `$${shirts.price.toFixed(2)}`
+                        {typeof productsshirts.price === "number"
+                          ? `$${productsshirts.price.toFixed(2)}`
                           : "Fiyat Yok"}
                       </span>
-                      {shirts.oldPrice && shirts.oldPrice > shirts.price && (
+                      {productsshirts.oldPrice && productsshirts.oldPrice > productsshirts.price && (
                         <span className="text-gray-400 line-through">
-                          {typeof shirts.oldPrice === "number"
-                            ? `$${shirts.oldPrice.toFixed(2)}`
+                          {typeof productsshirts.oldPrice === "number"
+                            ? `$${productsshirts.oldPrice.toFixed(2)}`
                             : ""}
                         </span>
                       )}

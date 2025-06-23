@@ -9,6 +9,7 @@ import {
   FiShoppingBag,
 } from "react-icons/fi";
 import Link from "next/link";
+import { useFavorites } from "@/components/Header&Footer/FavoritesContext";
 
 type IconWithTooltipProps = {
   Icon: FC<{ size?: number; className?: string }>;
@@ -55,6 +56,7 @@ function useIsMobile() {
 
 export default function Header() {
   const isMobile = useIsMobile();
+  const { favorites } = useFavorites();
 
   return (
     <div>
@@ -86,14 +88,18 @@ export default function Header() {
                 label="Ara"
                 size={isMobile ? 5 : 10}
               />
-              <IconWithTooltip
-                Icon={FiHeart}
-                label="Favorilerim"
-                size={isMobile ? 5 : 10}
-              />
+              <Link href="/favorites">
+                <IconWithTooltip
+                  Icon={FiHeart}
+                  label="Favorilerim"
+                  size={isMobile ? 5 : 10}
+                  badgeCount={favorites.length}
+                />
+              </Link>
+
               <IconWithTooltip
                 Icon={FiEye}
-                label="Sənin baxdıqların"
+                label="Siparişlerim"
                 size={isMobile ? 5 : 10}
               />
               <IconWithTooltip
@@ -103,7 +109,7 @@ export default function Header() {
               />
               <IconWithTooltip
                 Icon={FiShoppingBag}
-                label="Səbətim"
+                label="Sebetim"
                 badgeCount={0}
                 size={isMobile ? 5 : 10}
               />

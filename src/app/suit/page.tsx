@@ -4,16 +4,41 @@ import { products } from "@/app/suit/products";
 import Link from "next/link";
 import Header from "@/components/Header&Footer/Header";
 import { Rate } from "antd";
+import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
+import { useFavorites } from "@/components/Header&Footer/FavoritesContext";
 
 const menuItems = [
-  "Yeni Sezon", "Giyim", "Tişört", "Her Daim Basic", "Şort",
-  "Mayo / Deniz Şortu", "Gömlek", "Pantolon", "Takım Elbise",
-  "Kombinli Takım Elbise", "Klasik Takım Elbise", "Nano Takım Elbise",
-  "Yelekli Takım Elbise", "Yelekli Takm Elbise", "Sweatshirt",
-  "Smokin / Damatlik", "Esofman", "Triko / Kazak", "DIS Giyim", "Polar",
-  "IQ Giyim", "Kadin Giyim", "Online Exclusive", "Coklu Paket Urünler",
-  "Ayakkabı", "Aksesuar", "Kampanyalar", "AC x Burak ÖZGivit",
-  "Koleksiyon", "Mega Outlet", "AC Home",
+  "Yeni Sezon",
+  "Giyim",
+  "Tişört",
+  "Her Daim Basic",
+  "Şort",
+  "Mayo / Deniz Şortu",
+  "Gömlek",
+  "Pantolon",
+  "Takım Elbise",
+  "Kombinli Takım Elbise",
+  "Klasik Takım Elbise",
+  "Nano Takım Elbise",
+  "Yelekli Takım Elbise",
+  "Yelekli Takm Elbise",
+  "Sweatshirt",
+  "Smokin / Damatlik",
+  "Esofman",
+  "Triko / Kazak",
+  "DIS Giyim",
+  "Polar",
+  "IQ Giyim",
+  "Kadin Giyim",
+  "Online Exclusive",
+  "Coklu Paket Urünler",
+  "Ayakkabı",
+  "Aksesuar",
+  "Kampanyalar",
+  "AC x Burak ÖZGivit",
+  "Koleksiyon",
+  "Mega Outlet",
+  "AC Home",
 ];
 
 const sortOptions = [
@@ -29,6 +54,7 @@ export default function ProductLayout() {
   const [activeMenu, setActiveMenu] = useState(menuItems[0]);
   const [activeSort, setActiveSort] = useState(sortOptions[0].value);
   const [columns, setColumns] = useState(4);
+  const { favorites, toggleFavorite } = useFavorites();
 
   const sortedProducts = useMemo(() => {
     switch (activeSort) {
@@ -38,8 +64,7 @@ export default function ProductLayout() {
         return [...products].sort((a, b) => b.price - a.price);
       case "15":
         return [...products].sort(
-          (a, b) =>
-            new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+          (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
         );
       case "20":
         return [...products].sort((a, b) => b.salesCount - a.salesCount);
@@ -65,9 +90,7 @@ export default function ProductLayout() {
                 key={item}
                 onClick={() => setActiveMenu(item)}
                 className={`py-3 px-4 rounded-lg text-left text-black text-sm ${
-                  activeMenu === item
-                    ? "underline font-semibold"
-                    : "hover:underline"
+                  activeMenu === item ? "underline font-semibold" : "hover:underline"
                 } transition`}
                 type="button"
               >
@@ -134,6 +157,9 @@ export default function ProductLayout() {
               ];
               const [selectedImage, setSelectedImage] = useState(0);
 
+              // Favoritdirmi yoxlayırıq
+              const isFavorite = favorites.includes(product.id);
+
               return (
                 <Link
                   href={`/suit/${product.id}`}
@@ -147,6 +173,21 @@ export default function ProductLayout() {
                       className="w-full h-full object-cover object-top rounded-t-lg transition-transform group-hover:scale-105"
                       loading="lazy"
                     />
+                    <button
+                      onClick={(e) => {
+                        e.preventDefault(); // Linkin işini kəsirik ki səhifə dəyişməsin
+                        toggleFavorite(product.id);
+                      }}
+                      className="absolute top-2 right-2 bg-white p-1 rounded-full shadow hover:bg-gray-100 transition z-10"
+                      aria-label={isFavorite ? "Favoritdən sil" : "Favoritə əlavə et"}
+                    >
+                      {isFavorite ? (
+                        <AiFillHeart className="text-red-500 w-5 h-5" />
+                      ) : (
+                        <AiOutlineHeart className="text-gray-500 w-5 h-5" />
+                      )}
+                    </button>
+
                     {product.oldPrice && product.oldPrice > product.price && (
                       <span className="absolute top-2 left-2 bg-red-500 text-white text-xs font-bold px-2 py-1 rounded">
                         İndirim
