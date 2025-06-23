@@ -102,11 +102,15 @@ export default function Header() {
                 label="Siparişlerim"
                 size={isMobile ? 5 : 10}
               />
-              <IconWithTooltip
-                Icon={FiUser}
-                label="Hesabım"
-                size={isMobile ? 5 : 10}
-              />
+              <Link href="/login">
+                <IconWithTooltip
+                  Icon={FiUser}
+                  label="Hesabım"
+                  size={isMobile ? 5 : 10}
+                  badgeCount={favorites.length}
+                />
+              </Link>
+              
               <IconWithTooltip
                 Icon={FiShoppingBag}
                 label="Sebetim"
