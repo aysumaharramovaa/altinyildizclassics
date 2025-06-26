@@ -10,6 +10,7 @@ import {
 } from "react-icons/fi";
 import Link from "next/link";
 import { useFavorites } from "@/components/Header&Footer/FavoritesContext";
+import { useCart } from "@/components/Header&Footer/CartContext";
 
 type IconWithTooltipProps = {
   Icon: FC<{ size?: number; className?: string }>;
@@ -39,6 +40,7 @@ const IconWithTooltip: FC<IconWithTooltipProps> = ({
 
 function useIsMobile() {
   const [isMobile, setIsMobile] = useState(false);
+  
 
   useEffect(() => {
     function handleResize() {
@@ -57,6 +59,9 @@ function useIsMobile() {
 export default function Header() {
   const isMobile = useIsMobile();
   const { favorites } = useFavorites();
+  const { cart } = useCart();
+const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+
 
   return (
     <div>
@@ -107,14 +112,13 @@ export default function Header() {
                   Icon={FiUser}
                   label="Hesabım"
                   size={isMobile ? 5 : 10}
-                  badgeCount={favorites.length}
                 />
               </Link>
               <Link href="/basket">
                 <IconWithTooltip
                   Icon={FiShoppingBag}
                   label="Sebetim"
-                  badgeCount={0}
+                  badgeCount={totalItems}
                   size={isMobile ? 5 : 10}
                 />
               </Link>
