@@ -40,7 +40,6 @@ const IconWithTooltip: FC<IconWithTooltipProps> = ({
 
 function useIsMobile() {
   const [isMobile, setIsMobile] = useState(false);
-  
 
   useEffect(() => {
     function handleResize() {
@@ -60,8 +59,7 @@ export default function Header() {
   const isMobile = useIsMobile();
   const { favorites } = useFavorites();
   const { cart } = useCart();
-const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
-
+  const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
 
   return (
     <div>
@@ -102,11 +100,14 @@ const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
                 />
               </Link>
 
-              <IconWithTooltip
-                Icon={FiEye}
-                label="Siparişlerim"
-                size={isMobile ? 5 : 10}
-              />
+              <Link href="/myorders">
+                <IconWithTooltip
+                  Icon={FiEye}
+                  label="Siparişlerim"
+                  size={isMobile ? 5 : 10}
+                />
+              </Link>
+
               <Link href="/login">
                 <IconWithTooltip
                   Icon={FiUser}
@@ -114,6 +115,7 @@ const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
                   size={isMobile ? 5 : 10}
                 />
               </Link>
+
               <Link href="/basket">
                 <IconWithTooltip
                   Icon={FiShoppingBag}
@@ -143,11 +145,17 @@ const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
               Gömlek
             </Link>
             |
-            <Link href="/basictshirt" className="text-gray-700 hover:text-red-500">
+            <Link
+              href="/basictshirt"
+              className="text-gray-700 hover:text-red-500"
+            >
               Basic Tişört
             </Link>
             |
-            <Link href="/poloshirt" className="text-gray-700 hover:text-red-500">
+            <Link
+              href="/poloshirt"
+              className="text-gray-700 hover:text-red-500"
+            >
               Polo Tişört
             </Link>
             |
