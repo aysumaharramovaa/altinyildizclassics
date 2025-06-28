@@ -147,9 +147,9 @@ const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
               Basic Tişört
             </Link>
             |
-            <a href="#" className="text-gray-700 hover:text-red-500">
+            <Link href="/poloshirt" className="text-gray-700 hover:text-red-500">
               Polo Tişört
-            </a>
+            </Link>
             |
             <a href="#" className="text-gray-700 hover:text-red-500">
               Pantolon
