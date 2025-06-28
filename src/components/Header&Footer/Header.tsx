@@ -143,9 +143,9 @@ const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
               Gömlek
             </Link>
             |
-            <a href="#" className="text-gray-700 hover:text-red-500">
+            <Link href="/basictshirt" className="text-gray-700 hover:text-red-500">
               Basic Tişört
-            </a>
+            </Link>
             |
             <a href="#" className="text-gray-700 hover:text-red-500">
               Polo Tişört
