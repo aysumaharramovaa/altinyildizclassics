@@ -6,6 +6,7 @@ import Header from "@/components/Header&Footer/Header";
 import { Rate } from "antd";
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 import { useFavorites } from "@/components/Header&Footer/FavoritesContext";
+import Navigation from "@/components/Header&Footer/Navigation";
 
 const menuItems = [
   "Yeni Sezon",
@@ -78,6 +79,7 @@ export default function ProductLayout() {
   return (
     <>
       <Header />
+      <Navigation />
       <p className="text-sm pl-5 text-gray-600 mt-1">
         Ana Sayfa / Giyim / Polo Tişört
       </p>

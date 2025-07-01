@@ -8,6 +8,7 @@ type Product = {
   price: number;
   quantity: number;
   image?: string;
+  size?: string;
 };
 
 type CartContextType = {

@@ -5,6 +5,7 @@ import { productpolo } from "@/app/poloshirt/products";
 import { Rate } from "antd";
 import Header from "@/components/Header&Footer/Header";
 import { useCart } from "@/components/Header&Footer/CartContext";
+import Navigation from "@/components/Header&Footer/Navigation";
 
 type Product = {
   title: string;
@@ -48,6 +49,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   return (
     <>
       <Header />
+      <Navigation />
       <div className="flex max-w-6xl mx-auto bg-white rounded-lg overflow-hidden h-full">
         <div className="w-1/2 p-4 grid grid-cols-2 gap-4">
           {images.map((img, index) => (

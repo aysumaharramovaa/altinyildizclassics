@@ -144,7 +144,6 @@ export default function FlashProducts() {
         <h2 className="text-2xl font-bold uppercase border-gray-300 pb-2 mb-6">
           Flaş Ürünler
         </h2>
-        {/* Slider Controls */}
         <div className="relative">
           <div ref={sliderRef} className="keen-slider">
             {combinedItems.map((item, index) => (
@@ -183,7 +182,6 @@ export default function FlashProducts() {
             ))}
           </div>
 
-          {/* Slider  */}
           <button
             onClick={() => slider.current?.prev()}
             className="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-black text-white p-2 rounded-full hover:bg-gray-800"

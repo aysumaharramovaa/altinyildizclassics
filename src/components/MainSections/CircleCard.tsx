@@ -1,5 +1,6 @@
+"use client"
 import Image from "next/image";
-
+import { useRouter } from "next/navigation";
 const giftGuideData = [
   { src: "/circlecard/circlecard1.png" },
   { src: "/circlecard/circlecard2.png" },
@@ -11,6 +12,10 @@ const giftGuideData = [
 ];
 
 export default function CircleCard() {
+   const router = useRouter();
+      const handleClick = () => {
+      router.push("/suit");
+    };
   return (
     <div className="flex flex-wrap flex-col sm:flex-row justify-center items-center gap-4 p-4">
       {giftGuideData.map((item, index) => (
@@ -24,6 +29,7 @@ export default function CircleCard() {
               alt={`Hediye Kart ${index + 1}`}
               layout="fill"
               objectFit="contain"
+              onClick={handleClick}
             />
           </div>
         </div>

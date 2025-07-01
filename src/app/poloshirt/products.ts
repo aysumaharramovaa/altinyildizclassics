@@ -1,5 +1,6 @@
+import { title } from "process";
+
 export const productpolo = [
- 
   {
     title: "Slim Fit Dar Kesim Kivrllmaz Polo Yaka Kisa Kollu Sihah Tişört",
     price: 533.99,
@@ -52,4 +53,55 @@ export const productpolo = [
     ratingCount: 50,
     id: 34,
   },
+  {
+    title: "Slim Fit Dar Kesim Pamuklu Desenli Polo Yaka Siyah-Beyaz Tişört",
+    price: 500,
+    image: "/polotshirt/card5/photo (1).jpeg",
+    image1: "/polotshirt/card5/photo (2).jpeg",
+    image2: "/polotshirt/card5/photo (3).jpeg",
+    image3: "/polotshirt/card5/photo (4).jpeg",
+    createdAt: "2023-06-25",
+    salesCount: 300,
+    ratingCount: 50,
+    id: 35,
+  },
+   {
+    title: "100% Pamuk Kivrllmaz Pike Polo Yaka Slim Fit Dar Kesim Haki Tişört",
+    price: 670,
+    image: "/polotshirt/card6/photo (1).jpeg",
+    image1: "/polotshirt/card6/photo (2).jpeg",
+    image2: "/polotshirt/card6/photo (3).jpeg",
+    image3: "/polotshirt/card6/photo (4).jpeg",
+    createdAt: "2023-06-25",
+    salesCount: 300,
+    ratingCount: 50,
+    id: 36,
+  },
+     {
+    title: "Standart Fit Normal Kesim %IOO Pamuk Renk Bloklu Polo Yaka Ekru-Gri Triko Tişört",
+    price: 770,
+    image: "/polotshirt/card8/photo (1).jpeg",
+    image1: "/polotshirt/card8/photo (2).jpeg",
+    image2: "/polotshirt/card8/photo (3).jpeg",
+    image3: "/polotshirt/card8/photo (4).jpeg",
+    createdAt: "2023-06-25",
+    salesCount: 300,
+    ratingCount: 50,
+    id: 37,
+  },
+    {
+    title: "Pamuklu Comfort Fit Rahat Kesim Polo YakaCepli indigo-Beyaz Tişört",
+    price: 570,
+    image: "/polotshirt/card9/photo (1).jpeg",
+    image1: "/polotshirt/card9/photo (2).jpeg",
+    image2: "/polotshirt/card9/photo (3).jpeg",
+    image3: "/polotshirt/card9/photo (4).jpeg",
+    createdAt: "2023-06-25",
+    salesCount: 30,
+    ratingCount: 21,
+    id: 37,
+  },
+  
+
+
 ];

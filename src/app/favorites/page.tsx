@@ -8,6 +8,7 @@ import { products } from "@/app/suit/products";
 import { productsshirts } from "@/app/shirt/products";
 import { productbasictshirt } from "@/app/basictshirt/products";
 import { productpolo } from "@/app/poloshirt/products";
+import Navigation from "@/components/Header&Footer/Navigation";
 
 type ProductType =
   | (typeof products)[number]
@@ -49,12 +50,14 @@ export default function FavoritesPage() {
       self.findIndex(
         (p) =>
           p.id === product.id &&
-          (
-            products.some((s) => s.id === p.id) === products.some((s) => s.id === product.id) &&
-            productsshirts.some((s) => s.id === p.id) === productsshirts.some((s) => s.id === product.id) &&
-            productbasictshirt.some((b) => b.id === p.id) === productbasictshirt.some((b) => b.id === product.id) &&
-            productpolo.some((polo) => polo.id === p.id) === productpolo.some((polo) => polo.id === product.id)
-          )
+          products.some((s) => s.id === p.id) ===
+            products.some((s) => s.id === product.id) &&
+          productsshirts.some((s) => s.id === p.id) ===
+            productsshirts.some((s) => s.id === product.id) &&
+          productbasictshirt.some((b) => b.id === p.id) ===
+            productbasictshirt.some((b) => b.id === product.id) &&
+          productpolo.some((polo) => polo.id === p.id) ===
+            productpolo.some((polo) => polo.id === product.id)
       )
   );
 
@@ -62,6 +65,7 @@ export default function FavoritesPage() {
     return (
       <>
         <Header />
+        <Navigation />
         <div className="container mx-auto p-5">
           <h1 className="text-xl font-semibold mb-4">Favorilerim</h1>
           <p>Henüz favorilere eklenmiş ürün yok.</p>
@@ -73,13 +77,16 @@ export default function FavoritesPage() {
   return (
     <>
       <Header />
+      <Navigation />
       <div className="container mx-auto p-5">
         <h1 className="text-xl font-semibold mb-4">Favorilerim</h1>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
           {uniqueFavoriteProducts.map((product) => {
             const isSuit = products.some((p) => p.id === product.id);
             const isShirt = productsshirts.some((p) => p.id === product.id);
-            const isBasicTshirt = productbasictshirt.some((p) => p.id === product.id);
+            const isBasicTshirt = productbasictshirt.some(
+              (p) => p.id === product.id
+            );
             const isPolo = productpolo.some((p) => p.id === product.id);
 
             let urlPrefix = "";
@@ -115,14 +122,21 @@ export default function FavoritesPage() {
                   X
                 </button>
 
-                <Link href={`/${urlPrefix}/${product.id}`} className="block cursor-pointer">
+                <Link
+                  href={`/${urlPrefix}/${product.id}`}
+                  className="block cursor-pointer"
+                >
                   <img
                     src={product.image}
                     alt={product.title}
                     className="w-full h-48 object-cover object-top rounded"
                   />
-                  <h2 className="mt-2 font-semibold text-sm">{product.title}</h2>
-                  <p className="text-red-600 font-bold">${product.price.toFixed(2)}</p>
+                  <h2 className="mt-2 font-semibold text-sm">
+                    {product.title}
+                  </h2>
+                  <p className="text-red-600 font-bold">
+                    ${product.price.toFixed(2)}
+                  </p>
                 </Link>
               </div>
             );

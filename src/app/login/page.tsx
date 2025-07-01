@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import Header from "@/components/Header&Footer/Header";
+import Navigation from "@/components/Header&Footer/Navigation";
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -45,6 +46,7 @@ export default function Login() {
   return (
     <div>
       <Header />
+      <Navigation />
       <div className="min-h-screen flex items-start justify-center pt-20">
         <div className="max-w-md w-full bg-white">
           <h2 className="text-2xl font-semibold mb-2">Giriş Yap</h2>

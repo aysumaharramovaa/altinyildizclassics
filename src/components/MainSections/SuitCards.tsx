@@ -69,7 +69,9 @@ export default function GiftGuide() {
         />
       </Container>
 
-      <StyledImageLeft src="stiliniyansit.jpg" />
+{/*    bu img  yoxdu buna bax aysu
+      <StyledImageLeft src="stiliniyansit.jpg" /> */}
+
       <StyledImageLeft
         src="/suitcard/takım3.jpg"
         alt="Suit Card 3"

@@ -2,9 +2,10 @@
 
 import { useCart } from "@/components/Header&Footer/CartContext";
 import Header from "@/components/Header&Footer/Header";
+import Navigation from "@/components/Header&Footer/Navigation";
 import { ShoppingCart, Trash2 } from "lucide-react";
 import Link from "next/link";
-import { Card, CardContent } from "@/components/ui/card";
+
 export default function Sepet() {
   const { cart, removeFromCart, changeQuantity } = useCart();
 
@@ -17,6 +18,7 @@ export default function Sepet() {
   return (
     <div>
       <Header />
+      <Navigation />
       <div className="flex flex-col items-center justify-start mt-24 mb-20 px-4">
         <div className="max-w-6xl w-full grid grid-cols-1 md:grid-cols-3 gap-6">
           <div className="md:col-span-2">
@@ -25,7 +27,7 @@ export default function Sepet() {
             </h1>
 
             {cart.length === 0 ? (
-              <div className="bg-white p-8 rounded-lg max-w-md mx-auto text-center ">
+              <div className="bg-white p-8 rounded-lg max-w-md mx-auto text-center">
                 <p className="text-gray-600 mb-6">
                   Sepetinizde ürün bulunmamaktadır.
                 </p>
@@ -39,7 +41,7 @@ export default function Sepet() {
             ) : (
               <div className="bg-white rounded-lg p-6">
                 <ul>
-                  {cart.map(({ id, title, price, quantity, image }) => (
+                  {cart.map(({ id, title, price, quantity, image, size }) => (
                     <div
                       key={id}
                       className="flex items-center justify-between py-6"
@@ -61,6 +63,13 @@ export default function Sepet() {
                           <p className="text-sm text-gray-500">
                             Toplam: ₺{(price * quantity).toFixed(2)}
                           </p>
+                          {/* burda problem var aysu buna bax */}
+                          {size && (
+                            <p className="text-sm text-gray-500">
+                              Bədən ölçüsü:{" "}
+                              <span className="font-medium">{size}</span>
+                            </p>
+                          )}
                         </div>
                       </div>
 
@@ -106,8 +115,9 @@ export default function Sepet() {
               </div>
             )}
           </div>
+          
           {cart.length > 0 && (
-            <div className="bg-white rounded-lg  p-6 h-fit">
+            <div className="bg-white rounded-lg p-6 h-fit">
               <h2 className="text-xl font-semibold mb-4">Sipariş Özeti</h2>
               <div className="text-sm space-y-3">
                 <div className="flex justify-between">

@@ -6,6 +6,7 @@ import Header from "@/components/Header&Footer/Header";
 import { Rate } from "antd";
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 import { useFavorites } from "@/components/Header&Footer/FavoritesContext";
+import Navigation from "@/components/Header&Footer/Navigation";
 
 const menuItems = [
   "Yeni Sezon",
@@ -64,7 +65,8 @@ export default function ProductLayout() {
         return [...products].sort((a, b) => b.price - a.price);
       case "15":
         return [...products].sort(
-          (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+          (a, b) =>
+            new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
         );
       case "20":
         return [...products].sort((a, b) => b.salesCount - a.salesCount);
@@ -78,6 +80,8 @@ export default function ProductLayout() {
   return (
     <>
       <Header />
+      <Navigation />
+
       <p className="text-sm pl-5 text-gray-600 mt-1">
         Ana Sayfa / Giyim / Takım Elbise
       </p>
@@ -90,7 +94,9 @@ export default function ProductLayout() {
                 key={item}
                 onClick={() => setActiveMenu(item)}
                 className={`py-3 px-4 rounded-lg text-left text-black text-sm ${
-                  activeMenu === item ? "underline font-semibold" : "hover:underline"
+                  activeMenu === item
+                    ? "underline font-semibold"
+                    : "hover:underline"
                 } transition`}
                 type="button"
               >
@@ -156,8 +162,6 @@ export default function ProductLayout() {
                 product.image3,
               ];
               const [selectedImage, setSelectedImage] = useState(0);
-
-              // Favoritdirmi yoxlayırıq
               const isFavorite = favorites.includes(product.id);
 
               return (
@@ -175,11 +179,13 @@ export default function ProductLayout() {
                     />
                     <button
                       onClick={(e) => {
-                        e.preventDefault(); // Linkin işini kəsirik ki səhifə dəyişməsin
+                        e.preventDefault(); 
                         toggleFavorite(product.id);
                       }}
                       className="absolute top-2 right-2 bg-white p-1 rounded-full shadow hover:bg-gray-100 transition z-10"
-                      aria-label={isFavorite ? "Favoritdən sil" : "Favoritə əlavə et"}
+                      aria-label={
+                        isFavorite ? "Favoritdən sil" : "Favoritə əlavə et"
+                      }
                     >
                       {isFavorite ? (
                         <AiFillHeart className="text-red-500 w-5 h-5" />

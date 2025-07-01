@@ -7,6 +7,7 @@ import GiftGuide from "@/components/MainSections/GiftGuide";
 import { HeroCarousel } from "@/components/MainSections/HeroCarousel";
 import PhotoCard from "@/components/MainSections/PhotoCard";
 import SuitCards from "@/components/MainSections/SuitCards";
+import Navigation from "@/components/Header&Footer/Navigation";
 import React from "react";
 
 export default function HomePage() {
@@ -14,7 +15,7 @@ export default function HomePage() {
     <>
       <ScrollingBanner />
       <Header />
-      
+      <Navigation />
       <main>
         <section className="mt-2">
           <HeroCarousel />

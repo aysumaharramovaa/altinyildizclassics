@@ -6,6 +6,7 @@ import Header from "@/components/Header&Footer/Header";
 import { Rate } from "antd";
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 import { useFavorites } from "@/components/Header&Footer/FavoritesContext";
+import Navigation from "@/components/Header&Footer/Navigation";
 
 const menuItems = [
   "Yeni Sezon",
@@ -64,12 +65,15 @@ export default function ProductLayout() {
         return [...productsshirts].sort((a, b) => b.price - a.price);
       case "15":
         return [...productsshirts].sort(
-          (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+          (a, b) =>
+            new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
         );
       case "20":
         return [...productsshirts].sort((a, b) => b.salesCount - a.salesCount);
       case "25":
-        return [...productsshirts].sort((a, b) => b.ratingCount - a.ratingCount);
+        return [...productsshirts].sort(
+          (a, b) => b.ratingCount - a.ratingCount
+        );
       default:
         return productsshirts;
     }
@@ -78,8 +82,9 @@ export default function ProductLayout() {
   return (
     <>
       <Header />
+      <Navigation />
       <p className="text-sm pl-5 text-gray-600 mt-1">
-        Ana Sayfa / Giyim / Gömlek 
+        Ana Sayfa / Giyim / Gömlek
       </p>
 
       <div className="min-h-screen flex font-sans text-gray-800">
@@ -90,7 +95,9 @@ export default function ProductLayout() {
                 key={item}
                 onClick={() => setActiveMenu(item)}
                 className={`py-3 px-4 rounded-lg text-left text-black text-sm ${
-                  activeMenu === item ? "underline font-semibold" : "hover:underline"
+                  activeMenu === item
+                    ? "underline font-semibold"
+                    : "hover:underline"
                 } transition`}
                 type="button"
               >
@@ -156,8 +163,6 @@ export default function ProductLayout() {
                 productsshirts.image3,
               ];
               const [selectedImage, setSelectedImage] = useState(0);
-
-              // Favoritdirmi yoxlayırıq
               const isFavorite = favorites.includes(productsshirts.id);
 
               return (
@@ -175,11 +180,13 @@ export default function ProductLayout() {
                     />
                     <button
                       onClick={(e) => {
-                        e.preventDefault(); // Linkin işini kəsirik ki səhifə dəyişməsin
+                        e.preventDefault(); 
                         toggleFavorite(productsshirts.id);
                       }}
                       className="absolute top-2 right-2 bg-white p-1 rounded-full shadow hover:bg-gray-100 transition z-10"
-                      aria-label={isFavorite ? "Favoritdən sil" : "Favoritə əlavə et"}
+                      aria-label={
+                        isFavorite ? "Favoritdən sil" : "Favoritə əlavə et"
+                      }
                     >
                       {isFavorite ? (
                         <AiFillHeart className="text-red-500 w-5 h-5" />
@@ -188,11 +195,12 @@ export default function ProductLayout() {
                       )}
                     </button>
 
-                    {productsshirts.oldPrice && productsshirts.oldPrice > productsshirts.price && (
-                      <span className="absolute top-2 left-2 bg-red-500 text-white text-xs font-bold px-2 py-1 rounded">
-                        İndirim
-                      </span>
-                    )}
+                    {productsshirts.oldPrice &&
+                      productsshirts.oldPrice > productsshirts.price && (
+                        <span className="absolute top-2 left-2 bg-red-500 text-white text-xs font-bold px-2 py-1 rounded">
+                          İndirim
+                        </span>
+                      )}
                   </div>
 
                   <div className="flex justify-center mt-2 space-x-2">
@@ -228,13 +236,14 @@ export default function ProductLayout() {
                           ? `$${productsshirts.price.toFixed(2)}`
                           : "Fiyat Yok"}
                       </span>
-                      {productsshirts.oldPrice && productsshirts.oldPrice > productsshirts.price && (
-                        <span className="text-gray-400 line-through">
-                          {typeof productsshirts.oldPrice === "number"
-                            ? `$${productsshirts.oldPrice.toFixed(2)}`
-                            : ""}
-                        </span>
-                      )}
+                      {productsshirts.oldPrice &&
+                        productsshirts.oldPrice > productsshirts.price && (
+                          <span className="text-gray-400 line-through">
+                            {typeof productsshirts.oldPrice === "number"
+                              ? `$${productsshirts.oldPrice.toFixed(2)}`
+                              : ""}
+                          </span>
+                        )}
                     </div>
                   </div>
                 </Link>

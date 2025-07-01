@@ -1,6 +1,5 @@
 "use client";
 import React, { FC, useState, useEffect } from "react";
-import { Menu } from "lucide-react";
 import {
   FiSearch,
   FiHeart,
@@ -11,6 +10,7 @@ import {
 import Link from "next/link";
 import { useFavorites } from "@/components/Header&Footer/FavoritesContext";
 import { useCart } from "@/components/Header&Footer/CartContext";
+import { Menu as MenuIcon } from "lucide-react";
 
 type IconWithTooltipProps = {
   Icon: FC<{ size?: number; className?: string }>;
@@ -67,10 +67,12 @@ export default function Header() {
       <header className="bg-white border-b">
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
-            <button className="flex items-center gap-2 text-gray-700">
-              <Menu size={20} />
-              <span className="text-sm font-medium">MENÜ</span>
-            </button>
+            <Link href="/menu">
+              <button className="flex items-center gap-2 text-gray-700">
+                <MenuIcon size={20} />
+                <span className="text-sm font-medium">MENÜ</span>
+              </button>
+            </Link>
             <Link href="/" passHref>
               <div className="flex items-center gap-2">
                 <span className="text-base sm:text-lg md:text-xl lg:text-2xl font-bold tracking-wider">
@@ -129,62 +131,7 @@ export default function Header() {
         </div>
       </header>
 
-      {/* Navigation */}
-      <nav className="bg-white border-b">
-        <div className="container mx-auto px-4">
-          <div className="hidden lg:flex items-center justify-center gap-6 py-4 text-xs">
-            <a href="#" className="text-red-500 font-medium">
-              EN BABA BAYRAM
-            </a>
-            |
-            <Link href="/suit" className="text-gray-700 hover:text-red-500">
-              Takım Elbise
-            </Link>
-            |
-            <Link href="/shirt" className="text-gray-700 hover:text-red-500">
-              Gömlek
-            </Link>
-            |
-            <Link
-              href="/basictshirt"
-              className="text-gray-700 hover:text-red-500"
-            >
-              Basic Tişört
-            </Link>
-            |
-            <Link
-              href="/poloshirt"
-              className="text-gray-700 hover:text-red-500"
-            >
-              Polo Tişört
-            </Link>
-            |
-            <a href="#" className="text-gray-700 hover:text-red-500">
-              Pantolon
-            </a>
-            |
-            <a href="#" className="text-gray-700 hover:text-red-500">
-              Jean
-            </a>
-            |
-            <a href="#" className="text-gray-700 hover:text-red-500">
-              Şort / Mayo
-            </a>
-            |
-            <a href="#" className="text-gray-700 hover:text-red-500">
-              Sweatshirt
-            </a>
-            |
-            <a href="#" className="text-red-500 font-medium">
-              Çok Satanlar
-            </a>
-            |
-            <a href="#" className="text-gray-700 hover:text-red-500">
-              STARS
-            </a>
-          </div>
-        </div>
-      </nav>
+     
     </div>
   );
 }

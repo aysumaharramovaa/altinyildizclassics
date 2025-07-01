@@ -5,6 +5,7 @@ import { products } from "@/app/suit/products";
 import { Rate } from "antd";
 import Header from "@/components/Header&Footer/Header";
 import { useCart } from "@/components/Header&Footer/CartContext";
+import Navigation from "@/components/Header&Footer/Navigation";
 
 type Product = {
   title: string;
@@ -23,13 +24,16 @@ type ProductCardProps = {
 };
 
 const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
-  const images = [product.image, product.image1, product.image2, product.image3].filter(Boolean);
+  const images = [
+    product.image,
+    product.image1,
+    product.image2,
+    product.image3,
+  ].filter(Boolean);
   const { addToCart } = useCart();
+  const [size, setSize] = useState<string | null>(null);
 
   const [quantity, setQuantity] = useState(1);
-  // İstəsən beden seçimini state-də saxla, hazırda sadəcə select var
-  // const [size, setSize] = useState<string | null>(null);
-
   const handleAddToCart = () => {
     addToCart(
       {
@@ -45,6 +49,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   return (
     <>
       <Header />
+      <Navigation />
 
       <div className="flex max-w-6xl mx-auto bg-white rounded-lg overflow-hidden h-full">
         <div className="w-1/2 p-4 grid grid-cols-2 gap-4">
@@ -60,13 +65,21 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
 
         <div className="w-1/2 p-8 flex flex-col justify-between">
           <div>
-            <h2 className="text-2xl font-semibold mb-3 text-center">{product.title}</h2>
+            <h2 className="text-2xl font-semibold mb-3 text-center">
+              {product.title}
+            </h2>
             <p className="text-gray-600 mb-1 text-center">Elbise</p>
             <p className="text-gray-500 mb-4 text-center">ET3024200071LAC</p>
 
             <div className="flex items-center gap-2 mb-4">
-              <Rate allowHalf disabled defaultValue={product.ratingCount / 10} />
-              <span className="text-gray-600">{product.ratingCount} Değerlendirme</span>
+              <Rate
+                allowHalf
+                disabled
+                defaultValue={product.ratingCount / 10}
+              />
+              <span className="text-gray-600">
+                {product.ratingCount} Değerlendirme
+              </span>
             </div>
 
             <div className="flex items-center gap-3 mb-4 justify-center">
@@ -86,14 +99,22 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
               )}
             </div>
 
-            <p className="text-green-600 font-semibold mb-4 text-center">Sepette Az Öde</p>
+            <p className="text-green-600 font-semibold mb-4 text-center">
+              Sepette Az Öde
+            </p>
 
             <div className="mb-4">
               <label className="block mb-1 font-medium">Beden Seçin</label>
-              <select className="border border-gray-300 rounded px-3 py-2 w-full">
-                <option>Bedenimi Bul</option>
-                {[38, 40, 42, 44, 46, 48, 50, 52, 54].map((size) => (
-                  <option key={size}>{size}N</option>
+              <select
+                className="border border-gray-300 rounded px-3 py-2 w-full"
+                value={size || ""}
+                onChange={(e) => setSize(e.target.value)}
+              >
+                <option value="">Bedenimi Bul</option>
+                {[38, 40, 42, 44, 46, 48, 50, 52, 54].map((s) => (
+                  <option key={s} value={`${s}N`}>
+                    {s}N
+                  </option>
                 ))}
               </select>
             </div>
@@ -123,7 +144,9 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
           </div>
 
           <div className="mt-6 text-gray-500 text-sm border-t pt-4">
-            <p>Beden Kılavuzu, kumaş və yıkama talimatları burada gösterilebilir.</p>
+            <p>
+              Beden Kılavuzu, kumaş və yıkama talimatları burada gösterilebilir.
+            </p>
           </div>
         </div>
       </div>
