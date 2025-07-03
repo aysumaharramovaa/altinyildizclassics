@@ -3,18 +3,21 @@
 import React from "react";
 import Link from "next/link";
 import Header from "@/components/Header&Footer/Header";
+import Navigation from "@/components/Header&Footer/Navigation";
 import { useFavorites } from "@/components/Header&Footer/FavoritesContext";
+
 import { products } from "@/app/suit/products";
 import { productsshirts } from "@/app/shirt/products";
 import { productbasictshirt } from "@/app/basictshirt/products";
 import { productpolo } from "@/app/poloshirt/products";
-import Navigation from "@/components/Header&Footer/Navigation";
+import { trousersproducts } from "@/app/trousers/products";
 
 type ProductType =
   | (typeof products)[number]
   | (typeof productsshirts)[number]
   | (typeof productbasictshirt)[number]
-  | (typeof productpolo)[number];
+  | (typeof productpolo)[number]
+  | (typeof trousersproducts)[number];
 
 export default function FavoritesPage() {
   const { favorites, toggleFavorite } = useFavorites();
@@ -37,28 +40,22 @@ export default function FavoritesPage() {
     .map((favId) => productpolo.find((p) => p.id === favId))
     .filter((p): p is (typeof productpolo)[number] => p !== undefined);
 
+  const favoriteTrousers = uniqueFavorites
+    .map((favId) => trousersproducts.find((p) => p.id === favId))
+    .filter((p): p is (typeof trousersproducts)[number] => p !== undefined);
+
   const favoriteProducts: ProductType[] = [
     ...favoriteSuits,
     ...favoriteShirts,
     ...favoriteBasicTshirts,
     ...favoritePolos,
+    ...favoriteTrousers,
   ];
 
   const uniqueFavoriteProducts = favoriteProducts.filter(
     (product, index, self) =>
       index ===
-      self.findIndex(
-        (p) =>
-          p.id === product.id &&
-          products.some((s) => s.id === p.id) ===
-            products.some((s) => s.id === product.id) &&
-          productsshirts.some((s) => s.id === p.id) ===
-            productsshirts.some((s) => s.id === product.id) &&
-          productbasictshirt.some((b) => b.id === p.id) ===
-            productbasictshirt.some((b) => b.id === product.id) &&
-          productpolo.some((polo) => polo.id === p.id) ===
-            productpolo.some((polo) => polo.id === product.id)
-      )
+      self.findIndex((p) => p.id === product.id)
   );
 
   if (uniqueFavoriteProducts.length === 0) {
@@ -88,12 +85,16 @@ export default function FavoritesPage() {
               (p) => p.id === product.id
             );
             const isPolo = productpolo.some((p) => p.id === product.id);
+            const isTrousers = trousersproducts.some(
+              (p) => p.id === product.id
+            );
 
             let urlPrefix = "";
             if (isSuit) urlPrefix = "suit";
             else if (isShirt) urlPrefix = "shirt";
             else if (isBasicTshirt) urlPrefix = "basictshirt";
             else if (isPolo) urlPrefix = "poloshirt";
+            else if (isTrousers) urlPrefix = "trousers";
 
             const key = `${urlPrefix}-${product.id}`;
 
@@ -105,19 +106,7 @@ export default function FavoritesPage() {
                 <button
                   onClick={() => toggleFavorite(product.id)}
                   aria-label="Favorilerden sil"
-                  className="
-                    absolute top-2 right-2
-                    w-7 h-7
-                    flex items-center justify-center
-                    bg-gray-700 rounded-full shadow-md
-                    text-white hover:text-red-600
-                    hover:bg-gray-100
-                    transition
-                    cursor-pointer
-                    select-none
-                    z-10
-                    font-bold text-lg
-                  "
+                  className="absolute top-2 right-2 w-7 h-7 flex items-center justify-center bg-gray-700 rounded-full shadow-md text-white hover:text-red-600 hover:bg-gray-100 transition cursor-pointer select-none z-10 font-bold text-lg"
                 >
                   X
                 </button>
@@ -135,7 +124,7 @@ export default function FavoritesPage() {
                     {product.title}
                   </h2>
                   <p className="text-red-600 font-bold">
-                    ${product.price.toFixed(2)}
+                    ₺{product.price.toFixed(2)}
                   </p>
                 </Link>
               </div>

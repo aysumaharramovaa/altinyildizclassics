@@ -1,6 +1,6 @@
 "use client";
 import React, { useState, useMemo } from "react";
-import { productbasictshirt } from "@/app/basictshirt/products";
+import { trousersproducts } from "@/app/trousers/products";
 import Link from "next/link";
 import Header from "@/components/Header&Footer/Header";
 import { Rate } from "antd";
@@ -45,7 +45,6 @@ const menuItems = [
   { label: "Mega Outlet", href: "/mega-outlet" },
   { label: "AC Home", href: "/ac-home" },
 ];
-
 const sortOptions = [
   { value: "0", label: "Editör Sıralaması" },
   { value: "10", label: "Fiyata Göre Artan" },
@@ -64,24 +63,20 @@ export default function ProductLayout() {
   const sortedProducts = useMemo(() => {
     switch (activeSort) {
       case "10":
-        return [...productbasictshirt].sort((a, b) => a.price - b.price);
+        return [...trousersproducts].sort((a, b) => a.price - b.price);
       case "11":
-        return [...productbasictshirt].sort((a, b) => b.price - a.price);
+        return [...trousersproducts].sort((a, b) => b.price - a.price);
       case "15":
-        return [...productbasictshirt].sort(
+        return [...trousersproducts].sort(
           (a, b) =>
             new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
         );
       case "20":
-        return [...productbasictshirt].sort(
-          (a, b) => b.salesCount - a.salesCount
-        );
+        return [...trousersproducts].sort((a, b) => b.salesCount - a.salesCount);
       case "25":
-        return [...productbasictshirt].sort(
-          (a, b) => b.ratingCount - a.ratingCount
-        );
+        return [...trousersproducts].sort((a, b) => b.ratingCount - a.ratingCount);
       default:
-        return productbasictshirt;
+        return trousersproducts;
     }
   }, [activeSort]);
 
@@ -89,12 +84,13 @@ export default function ProductLayout() {
     <>
       <Header />
       <Navigation />
+
       <p className="text-sm pl-5 text-gray-600 mt-1">
-        Ana Sayfa / Giyim / Basic Tişört
+        Ana Sayfa / Giyim / Pantolon
       </p>
 
       <div className="min-h-screen flex font-sans text-gray-800">
-        <aside className="hidden lg:flex w-48 h-screen overflow-y-auto flex-col">
+          <aside className="w-48 h-screen overflow-y-auto flex flex-col">
           <nav className="flex flex-col mt-4 px-4 space-y-1">
             {menuItems.map((item) => (
               <Link
@@ -161,33 +157,33 @@ export default function ProductLayout() {
                 : "grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
             }`}
           >
-            {sortedProducts.map((productbasictshirt, idx) => {
+            {sortedProducts.map((trousersproducts, idx) => {
               const images = [
-                productbasictshirt.image,
-                productbasictshirt.image1,
-                productbasictshirt.image2,
-                productbasictshirt.image3,
+                trousersproducts.image,
+                trousersproducts.image1,
+                trousersproducts.image2,
+                trousersproducts.image3,
               ];
               const [selectedImage, setSelectedImage] = useState(0);
-              const isFavorite = favorites.includes(productbasictshirt.id);
+              const isFavorite = favorites.includes(trousersproducts.id);
 
               return (
                 <Link
-                  href={`/basictshirt/${productbasictshirt.id}`}
-                  key={`${productbasictshirt.id}-${idx}`}
+                  href={`/trousers/${trousersproducts.id}`}
+                  key={`${trousersproducts.id}-${idx}`}
                   className="block group"
                 >
                   <div className="bg-white rounded-lg shadow-md overflow-hidden cursor-pointer hover:shadow-xl transition w-full h-60 relative">
                     <img
                       src={images[selectedImage]}
-                      alt={productbasictshirt.title}
+                      alt={trousersproducts.title}
                       className="w-full h-full object-cover object-top rounded-t-lg transition-transform group-hover:scale-105"
                       loading="lazy"
                     />
                     <button
                       onClick={(e) => {
-                        e.preventDefault();
-                        toggleFavorite(productbasictshirt.id);
+                        e.preventDefault(); 
+                        toggleFavorite(trousersproducts.id);
                       }}
                       className="absolute top-2 right-2 bg-white p-1 rounded-full shadow hover:bg-gray-100 transition z-10"
                       aria-label={
@@ -201,13 +197,11 @@ export default function ProductLayout() {
                       )}
                     </button>
 
-                    {productbasictshirt.oldPrice &&
-                      productbasictshirt.oldPrice >
-                        productbasictshirt.price && (
-                        <span className="absolute top-2 left-2 bg-red-500 text-white text-xs font-bold px-2 py-1 rounded">
-                          İndirim
-                        </span>
-                      )}
+                    {trousersproducts.oldPrice && trousersproducts.oldPrice > trousersproducts.price && (
+                      <span className="absolute top-2 left-2 bg-red-500 text-white text-xs font-bold px-2 py-1 rounded">
+                        İndirim
+                      </span>
+                    )}
                   </div>
 
                   <div className="flex justify-center mt-2 space-x-2">
@@ -226,32 +220,30 @@ export default function ProductLayout() {
 
                   <div className="mt-3 p-3 rounded-b-lg">
                     <h3 className="text-xs font-light text-gray-900 mb-1 line-clamp-2">
-                      {productbasictshirt.title}
+                      {trousersproducts.title}
                     </h3>
                     <Rate
                       allowHalf
                       disabled
                       defaultValue={
-                        typeof productbasictshirt.ratingCount === "number"
-                          ? productbasictshirt.ratingCount / 10
+                        typeof trousersproducts.ratingCount === "number"
+                          ? trousersproducts.ratingCount / 10
                           : 0
                       }
                     />
                     <div className="flex items-center space-x-2 text-xs mt-1">
                       <span className="text-black font-semibold">
-                        {typeof productbasictshirt.price === "number"
-                          ? `$${productbasictshirt.price.toFixed(2)}`
+                        {typeof trousersproducts.price === "number"
+                          ? `$${trousersproducts.price.toFixed(2)}`
                           : "Fiyat Yok"}
                       </span>
-                      {productbasictshirt.oldPrice &&
-                        productbasictshirt.oldPrice >
-                          productbasictshirt.price && (
-                          <span className="text-gray-400 line-through">
-                            {typeof productbasictshirt.oldPrice === "number"
-                              ? `$${productbasictshirt.oldPrice.toFixed(2)}`
-                              : ""}
-                          </span>
-                        )}
+                      {trousersproducts.oldPrice && trousersproducts.oldPrice > trousersproducts.price && (
+                        <span className="text-gray-400 line-through">
+                          {typeof trousersproducts.oldPrice === "number"
+                            ? `$${trousersproducts.oldPrice.toFixed(2)}`
+                            : ""}
+                        </span>
+                      )}
                     </div>
                   </div>
                 </Link>

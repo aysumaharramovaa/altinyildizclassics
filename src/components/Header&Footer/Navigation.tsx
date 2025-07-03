@@ -33,9 +33,9 @@ export default function Navigation() {
             Polo Tişört
           </Link>
           |
-          <a href="#" className="text-gray-700 hover:text-red-500">
+          <Link href="/trousers" className="text-gray-700 hover:text-red-500">
             Pantolon
-          </a>
+          </Link>
           |
           <a href="#" className="text-gray-700 hover:text-red-500">
             Jean

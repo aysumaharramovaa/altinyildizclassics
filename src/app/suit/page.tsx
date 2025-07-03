@@ -7,39 +7,42 @@ import { Rate } from "antd";
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 import { useFavorites } from "@/components/Header&Footer/FavoritesContext";
 import Navigation from "@/components/Header&Footer/Navigation";
-
+type MenuItem = {
+  label: string;
+  href: string;
+};
 const menuItems = [
-  "Yeni Sezon",
-  "Giyim",
-  "Tişört",
-  "Her Daim Basic",
-  "Şort",
-  "Mayo / Deniz Şortu",
-  "Gömlek",
-  "Pantolon",
-  "Takım Elbise",
-  "Kombinli Takım Elbise",
-  "Klasik Takım Elbise",
-  "Nano Takım Elbise",
-  "Yelekli Takım Elbise",
-  "Yelekli Takm Elbise",
-  "Sweatshirt",
-  "Smokin / Damatlik",
-  "Esofman",
-  "Triko / Kazak",
-  "DIS Giyim",
-  "Polar",
-  "IQ Giyim",
-  "Kadin Giyim",
-  "Online Exclusive",
-  "Coklu Paket Urünler",
-  "Ayakkabı",
-  "Aksesuar",
-  "Kampanyalar",
-  "AC x Burak ÖZGivit",
-  "Koleksiyon",
-  "Mega Outlet",
-  "AC Home",
+  { label: "Yeni Sezon", href: "/" },
+  { label: "Giyim", href: "/giyim" },
+  { label: "Basic Tişört", href: "/basictshirt" },
+  { label: "Gömlek", href: "/shirt" },
+  { label: "Pantolon", href: "/trousers" },
+  { label: "Takım Elbise", href: "/suit" },
+  {label : "Polo Tişört", href: "/poloshirt"},
+  { label: "Her Daim Basic", href: "/her-daim-basic" },
+  { label: "Şort", href: "/sort" },
+  { label: "Mayo / Deniz Şortu", href: "/mayo-deniz-sortu" },
+  { label: "Klasik Takım Elbise", href: "/klasik-takim-elbise" },
+  { label: "Nano Takım Elbise", href: "/nano-takim-elbise" },
+  { label: "Yelekli Takım Elbise", href: "/yelekli-takim-elbise" },
+  { label: "Yelekli Takm Elbise", href: "/yelekli-takm-elbise" },
+  { label: "Sweatshirt", href: "/sweatshirt" },
+  { label: "Smokin / Damatlik", href: "/smokin-damatlik" },
+  { label: "Esofman", href: "/esofman" },
+  { label: "Triko / Kazak", href: "/triko-kazak" },
+  { label: "DIS Giyim", href: "/dis-giyim" },
+  { label: "Polar", href: "/polar" },
+  { label: "IQ Giyim", href: "/iq-giyim" },
+  { label: "Kadin Giyim", href: "/kadin-giyim" },
+  { label: "Online Exclusive", href: "/online-exclusive" },
+  { label: "Coklu Paket Urünler", href: "/coklu-paket-urunler" },
+  { label: "Ayakkabı", href: "/ayakkabi" },
+  { label: "Aksesuar", href: "/aksesuar" },
+  { label: "Kampanyalar", href: "/kampanyalar" },
+  { label: "AC x Burak ÖZGivit", href: "/ac-x-burak-ozgivit" },
+  { label: "Koleksiyon", href: "/koleksiyon" },
+  { label: "Mega Outlet", href: "/mega-outlet" },
+  { label: "AC Home", href: "/ac-home" },
 ];
 
 const sortOptions = [
@@ -87,21 +90,21 @@ export default function ProductLayout() {
       </p>
 
       <div className="min-h-screen flex font-sans text-gray-800">
-        <aside className="w-48 h-screen overflow-y-auto flex flex-col">
+       <aside className="hidden lg:flex w-48 h-screen overflow-y-auto flex-col">
           <nav className="flex flex-col mt-4 px-4 space-y-1">
             {menuItems.map((item) => (
-              <button
-                key={item}
-                onClick={() => setActiveMenu(item)}
+              <Link
+                key={item.href}
+                href={item.href}
                 className={`py-3 px-4 rounded-lg text-left text-black text-sm ${
-                  activeMenu === item
+                  activeMenu.href === item.href
                     ? "underline font-semibold"
                     : "hover:underline"
                 } transition`}
-                type="button"
+                onClick={() => setActiveMenu(item)}
               >
-                {item}
-              </button>
+                {item.label}
+              </Link>
             ))}
           </nav>
         </aside>
@@ -179,7 +182,7 @@ export default function ProductLayout() {
                     />
                     <button
                       onClick={(e) => {
-                        e.preventDefault(); 
+                        e.preventDefault();
                         toggleFavorite(product.id);
                       }}
                       className="absolute top-2 right-2 bg-white p-1 rounded-full shadow hover:bg-gray-100 transition z-10"
