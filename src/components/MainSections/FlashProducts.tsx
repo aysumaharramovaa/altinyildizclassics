@@ -4,8 +4,9 @@ import "keen-slider/keen-slider.min.css";
 import { useKeenSlider } from "keen-slider/react";
 import { Card, CardContent } from "../ui/card";
 import { Badge } from "../ui/badge";
-import { useRef } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import { productpolo } from "@/app/poloshirt/products";
+import Link from "next/link";
 
 export default function FlashProducts() {
   const [sliderRef, slider] = useKeenSlider<HTMLDivElement>({
@@ -28,6 +29,7 @@ export default function FlashProducts() {
 
   const coupons = [
     {
+      id: "coupon1",
       title: "%100 Pamuk Oxford Slim Fit Dar Kesim Düğmeli Yaka Beyaz...",
       price: 743.5,
       oldPrice: 773.99,
@@ -35,134 +37,33 @@ export default function FlashProducts() {
     },
   ];
 
-  const products = [
-    {
-      title: "%100 Pamuk Oxford Slim Fit Dar Kesim Düğmeli Yaka Beyaz...",
-      price: 743.5,
-      oldPrice: 773.99,
-      image: "/flashproducts/product1.jpeg",
-    },
-    {
-      title: "Slim Fit Dar Kesim Kıvrılmaz Polo Yaka Kısa Kollu Açık Mavi...",
-      price: 416.67,
-      oldPrice: 453.99,
-      image: "/flashproducts/product2.jpeg",
-    },
-    {
-      title: "Slim Fit Dar Kesim Bisiklet Yaka %100 Pamuk Kısa Kollu...",
-      price: 303.99,
-      oldPrice: null,
-      image: "/flashproducts/product3.jpeg",
-    },
-    {
-      title: "Regular Fit Geniş Kesim Polo Yaka %100 Pamuk Ekru-Bordo...",
-      price: 619.32,
-      oldPrice: 679.99,
-      image: "/flashproducts/product4.jpeg",
-    },
-    {
-      title: "Slim Fit Dar Kesim Bisiklet Yaka %100 Pamuk ısa Kollu Si...",
-      price: 309.99,
-      oldPrice: 303.99,
-      image: "/flashproducts/product5.jpeg",
-    },
-    {
-      title: "Comfort Fit Rahat Kesim Düğmeli Yaka Casual Keten Yavru...",
-      price: 879.32,
-      oldPrice: 779.22,
-      image: "/flashproducts/product6.jpeg",
-    },
-    {
-      title: "Slim Fit Dar Kesim Bisiklet Yaka %100 Pamuk ısa Kollu...",
-      price: 879.32,
-      oldPrice: 779.22,
-      image: "/flashproducts/product7.jpeg",
-    },
-    {
-      title:
-        "Slim Fit Rahat Kesim Beli Bağlamalı Yan Cepli Esnek Jogger...",
-      price: 879.32,
-      oldPrice: 779.22,
-      image: "/flashproducts/product8.jpeg",
-    },
-    {
-      title:
-        "Slim Fit Rahat Kesim Beli Bağlamalı Yan Cepli Esnek Jogger...",
-      price: 879.32,
-      oldPrice: 779.22,
-      image: "/flashproducts/product9.jpeg",
-    },
-    {
-      title:
-        "Slim Fit Rahat Kesim Beli Bağlamalı Yan Cepli Esnek Jogger...",
-      price: 879.32,
-      oldPrice: 779.22,
-      image: "/flashproducts/product10.jpeg",
-    },
-    {
-      title:
-        "Slim Fit Rahat Kesim Beli Bağlamalı Yan Cepli Esnek Jogger...",
-      price: 879.32,
-      oldPrice: 779.22,
-      image: "/flashproducts/product11.jpeg",
-    },
-    {
-      title:
-        "Slim Fit Rahat Kesim Beli Bağlamalı Yan Cepli Esnek Jogger...",
-      price: 879.32,
-      oldPrice: 779.22,
-      image: "/flashproducts/product12.jpeg",
-    },
-    {
-      title:
-        "Slim Fit Rahat Kesim Beli Bağlamalı Yan Cepli Esnek Jogger...",
-      price: 879.32,
-      oldPrice: 779.22,
-      image: "/flashproducts/product13.jpeg",
-    },
-    {
-      title:
-        "Slim Fit Rahat Kesim Beli Bağlamalı Yan Cepli Esnek Jogger...",
-      price: 879.32,
-      oldPrice: 779.22,
-      image: "/flashproducts/product14.jpeg",
-    },
-    {
-      title:
-        "Slim Fit Rahat Kesim Beli Bağlamalı Yan Cepli Esnek Jogger...",
-      price: 879.32,
-      oldPrice: 779.22,
-      image: "/flashproducts/product15.jpeg",
-    },
-  ];
-
-  const combinedItems = [...coupons, ...products];
+  const combinedItems = [...coupons, ...productpolo];
 
   return (
-        <div className="min-h-screen bg-white py-10 overflow-hidden">
+    <div className="min-h-screen bg-white py-10 overflow-hidden">
       <div className="container mx-auto px-4">
         <h2 className="text-2xl font-bold uppercase border-gray-300 pb-2 mb-6">
           Flaş Ürünler
         </h2>
         <div className="relative">
           <div ref={sliderRef} className="keen-slider">
-            {combinedItems.map((item, index) => (
-              <div className="keen-slider__slide" key={index}>
-                <Card className="group cursor-pointer overflow-hidden shadow-md">
-                  <div className="relative">
+            {combinedItems.map((item, index) => {
+              const card = (
+                <Card className="group cursor-pointer overflow-hidden shadow-md h-[480px] flex flex-col justify-between">
+                  <div className={`relative ${index === 0 ? "h-[32rem]" : "h-[280px]"}`}>
                     <img
                       src={item.image}
                       alt={item.title}
-                      className={`w-full ${
-                        index === 0 ? "h-[28rem]" : "h-72"
-                      } object-cover transition-transform duration-300`}
+                      className="w-full h-full object-cover"
                     />
                   </div>
 
                   {index !== 0 && (
-                    <CardContent className="p-4 space-y-2">
-                      <h3 className="font-semibold text-base">{item.title}</h3>
-                      <div className="flex items-center gap-2">
+                    <CardContent className="p-3 flex flex-col justify-between flex-grow">
+                      <h3 className="font-semibold text-base line-clamp-2 min-h-[2rem]">
+                        {item.title}
+                      </h3>
+                      <div className="flex items-center gap-2 mt-1">
                         {item.oldPrice && (
                           <span className="text-sm text-gray-500 line-through">
                             {item.oldPrice} TL
@@ -172,14 +73,24 @@ export default function FlashProducts() {
                           {item.price} TL
                         </span>
                       </div>
-                      <Badge className="bg-yellow-800 text-white">
+                      <Badge className="bg-yellow-800 text-white mt-1">
                         Sepette %10 Az Öde
                       </Badge>
                     </CardContent>
                   )}
                 </Card>
-              </div>
-            ))}
+              );
+
+              return (
+                <div className="keen-slider__slide" key={index}>
+                  {index !== 0 ? (
+                    <Link href={`/poloshirt/${item.id}`}>{card}</Link>
+                  ) : (
+                    card
+                  )}
+                </div>
+              );
+            })}
           </div>
 
           <button

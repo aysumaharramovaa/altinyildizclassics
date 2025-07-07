@@ -7,44 +7,9 @@ import { Rate } from "antd";
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 import { useFavorites } from "@/components/Header&Footer/FavoritesContext";
 import Navigation from "@/components/Header&Footer/Navigation";
+import MenuSidebar from "@/components/MenuSidebar";
 
-type MenuItem = {
-  label: string;
-  href: string;
-};
-const menuItems = [
-  { label: "Yeni Sezon", href: "/" },
-  { label: "Giyim", href: "/giyim" },
-  { label: "Basic Tişört", href: "/basictshirt" },
-  { label: "Gömlek", href: "/shirt" },
-  { label: "Pantolon", href: "/trousers" },
-  { label: "Takım Elbise", href: "/suit" },
-  { label: "Polo Tişört", href: "/poloshirt" },
-  { label: "Her Daim Basic", href: "/her-daim-basic" },
-  { label: "Şort", href: "/sort" },
-  { label: "Mayo / Deniz Şortu", href: "/mayo-deniz-sortu" },
-  { label: "Klasik Takım Elbise", href: "/klasik-takim-elbise" },
-  { label: "Nano Takım Elbise", href: "/nano-takim-elbise" },
-  { label: "Yelekli Takım Elbise", href: "/yelekli-takim-elbise" },
-  { label: "Yelekli Takm Elbise", href: "/yelekli-takm-elbise" },
-  { label: "Sweatshirt", href: "/sweatshirt" },
-  { label: "Smokin / Damatlik", href: "/smokin-damatlik" },
-  { label: "Esofman", href: "/esofman" },
-  { label: "Triko / Kazak", href: "/triko-kazak" },
-  { label: "DIS Giyim", href: "/dis-giyim" },
-  { label: "Polar", href: "/polar" },
-  { label: "IQ Giyim", href: "/iq-giyim" },
-  { label: "Kadin Giyim", href: "/kadin-giyim" },
-  { label: "Online Exclusive", href: "/online-exclusive" },
-  { label: "Coklu Paket Urünler", href: "/coklu-paket-urunler" },
-  { label: "Ayakkabı", href: "/ayakkabi" },
-  { label: "Aksesuar", href: "/aksesuar" },
-  { label: "Kampanyalar", href: "/kampanyalar" },
-  { label: "AC x Burak ÖZGivit", href: "/ac-x-burak-ozgivit" },
-  { label: "Koleksiyon", href: "/koleksiyon" },
-  { label: "Mega Outlet", href: "/mega-outlet" },
-  { label: "AC Home", href: "/ac-home" },
-];
+
 const sortOptions = [
   { value: "0", label: "Editör Sıralaması" },
   { value: "10", label: "Fiyata Göre Artan" },
@@ -55,8 +20,8 @@ const sortOptions = [
 ];
 
 export default function ProductLayout() {
-  const [activeMenu, setActiveMenu] = useState(menuItems[0]);
-  const [activeSort, setActiveSort] = useState(sortOptions[0].value);
+  const [activeMenu, setActiveMenu] = useState({ label: "Yeni Sezon", href: "/" });
+ const [activeSort, setActiveSort] = useState(sortOptions[0].value);
   const [columns, setColumns] = useState(4);
   const { favorites, toggleFavorite } = useFavorites();
 
@@ -89,25 +54,11 @@ export default function ProductLayout() {
         Ana Sayfa / Giyim / Pantolon
       </p>
 
-      <div className="min-h-screen flex font-sans text-gray-800">
-          <aside className="w-48 h-screen overflow-y-auto flex flex-col">
-          <nav className="flex flex-col mt-4 px-4 space-y-1">
-            {menuItems.map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                className={`py-3 px-4 rounded-lg text-left text-black text-sm ${
-                  activeMenu.href === item.href
-                    ? "underline font-semibold"
-                    : "hover:underline"
-                } transition`}
-                onClick={() => setActiveMenu(item)}
-              >
-                {item.label}
-              </Link>
-            ))}
-          </nav>
-        </aside>
+       <div className="min-h-screen flex font-sans text-gray-800">
+            <MenuSidebar
+              activeHref={activeMenu.href}
+              onChange={(item) => setActiveMenu(item)}
+            />
 
         <main className="flex-1 p-5 overflow-auto">
           <div className="px-2 pt-4 flex items-center gap-4">

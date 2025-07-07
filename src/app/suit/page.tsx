@@ -3,47 +3,11 @@ import React, { useState, useMemo } from "react";
 import { products } from "@/app/suit/products";
 import Link from "next/link";
 import Header from "@/components/Header&Footer/Header";
+import Navigation from "@/components/Header&Footer/Navigation";
+import MenuSidebar from "@/components/MenuSidebar";
 import { Rate } from "antd";
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 import { useFavorites } from "@/components/Header&Footer/FavoritesContext";
-import Navigation from "@/components/Header&Footer/Navigation";
-type MenuItem = {
-  label: string;
-  href: string;
-};
-const menuItems = [
-  { label: "Yeni Sezon", href: "/" },
-  { label: "Giyim", href: "/giyim" },
-  { label: "Basic Tişört", href: "/basictshirt" },
-  { label: "Gömlek", href: "/shirt" },
-  { label: "Pantolon", href: "/trousers" },
-  { label: "Takım Elbise", href: "/suit" },
-  {label : "Polo Tişört", href: "/poloshirt"},
-  { label: "Her Daim Basic", href: "/her-daim-basic" },
-  { label: "Şort", href: "/sort" },
-  { label: "Mayo / Deniz Şortu", href: "/mayo-deniz-sortu" },
-  { label: "Klasik Takım Elbise", href: "/klasik-takim-elbise" },
-  { label: "Nano Takım Elbise", href: "/nano-takim-elbise" },
-  { label: "Yelekli Takım Elbise", href: "/yelekli-takim-elbise" },
-  { label: "Yelekli Takm Elbise", href: "/yelekli-takm-elbise" },
-  { label: "Sweatshirt", href: "/sweatshirt" },
-  { label: "Smokin / Damatlik", href: "/smokin-damatlik" },
-  { label: "Esofman", href: "/esofman" },
-  { label: "Triko / Kazak", href: "/triko-kazak" },
-  { label: "DIS Giyim", href: "/dis-giyim" },
-  { label: "Polar", href: "/polar" },
-  { label: "IQ Giyim", href: "/iq-giyim" },
-  { label: "Kadin Giyim", href: "/kadin-giyim" },
-  { label: "Online Exclusive", href: "/online-exclusive" },
-  { label: "Coklu Paket Urünler", href: "/coklu-paket-urunler" },
-  { label: "Ayakkabı", href: "/ayakkabi" },
-  { label: "Aksesuar", href: "/aksesuar" },
-  { label: "Kampanyalar", href: "/kampanyalar" },
-  { label: "AC x Burak ÖZGivit", href: "/ac-x-burak-ozgivit" },
-  { label: "Koleksiyon", href: "/koleksiyon" },
-  { label: "Mega Outlet", href: "/mega-outlet" },
-  { label: "AC Home", href: "/ac-home" },
-];
 
 const sortOptions = [
   { value: "0", label: "Editör Sıralaması" },
@@ -55,7 +19,7 @@ const sortOptions = [
 ];
 
 export default function ProductLayout() {
-  const [activeMenu, setActiveMenu] = useState(menuItems[0]);
+  const [activeMenu, setActiveMenu] = useState({ label: "Yeni Sezon", href: "/" });
   const [activeSort, setActiveSort] = useState(sortOptions[0].value);
   const [columns, setColumns] = useState(4);
   const { favorites, toggleFavorite } = useFavorites();
@@ -90,24 +54,10 @@ export default function ProductLayout() {
       </p>
 
       <div className="min-h-screen flex font-sans text-gray-800">
-       <aside className="hidden lg:flex w-48 h-screen overflow-y-auto flex-col">
-          <nav className="flex flex-col mt-4 px-4 space-y-1">
-            {menuItems.map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                className={`py-3 px-4 rounded-lg text-left text-black text-sm ${
-                  activeMenu.href === item.href
-                    ? "underline font-semibold"
-                    : "hover:underline"
-                } transition`}
-                onClick={() => setActiveMenu(item)}
-              >
-                {item.label}
-              </Link>
-            ))}
-          </nav>
-        </aside>
+        <MenuSidebar
+          activeHref={activeMenu.href}
+          onChange={(item) => setActiveMenu(item)}
+        />
 
         <main className="flex-1 p-5 overflow-auto">
           <div className="px-2 pt-4 flex items-center gap-4">
@@ -164,7 +114,8 @@ export default function ProductLayout() {
                 product.image2,
                 product.image3,
               ];
-              const [selectedImage, setSelectedImage] = useState(0);
+              
+
               const isFavorite = favorites.includes(product.id);
 
               return (
@@ -175,7 +126,7 @@ export default function ProductLayout() {
                 >
                   <div className="bg-white rounded-lg shadow-md overflow-hidden cursor-pointer hover:shadow-xl transition w-full h-60 relative">
                     <img
-                      src={images[selectedImage]}
+                      src={images[0]}
                       alt={product.title}
                       className="w-full h-full object-cover object-top rounded-t-lg transition-transform group-hover:scale-105"
                       loading="lazy"
@@ -202,20 +153,6 @@ export default function ProductLayout() {
                         İndirim
                       </span>
                     )}
-                  </div>
-
-                  <div className="flex justify-center mt-2 space-x-2">
-                    {images.map((_, i) => (
-                      <div
-                        key={i}
-                        onMouseEnter={() => setSelectedImage(i)}
-                        className={`h-1.5 w-6 rounded-full cursor-pointer transition-all ${
-                          selectedImage === i
-                            ? "bg-black"
-                            : "bg-gray-300 hover:bg-gray-400"
-                        }`}
-                      />
-                    ))}
                   </div>
 
                   <div className="mt-3 p-3 rounded-b-lg">

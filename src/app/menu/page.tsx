@@ -3,7 +3,6 @@
 import Header from "@/components/Header&Footer/Header";
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
-import Link from "next/link";
 
 export default function Menu() {
   const router = useRouter();
@@ -21,6 +20,39 @@ export default function Menu() {
   const handleClose = () => {
     router.push("/");
   };
+  
+  const existingRoutes = [
+    "/",
+    "/basictshirt",
+    "/shirt",
+    "/trousers",
+    "/suit",
+    "/poloshirt",
+    "/esofman",
+    "/ceket",
+    "/dis-giyim",
+    "/polar",
+    "/tum-ayakkabi",
+    "/casual-ayakkabi",
+    "/klasik-ayakkabi",
+    "/sneaker",
+    "/bot",
+    "/terlik",
+    "/tum-aksesuar",
+    "/takim-elbise-aksesuar",
+    "/aksesuar-setleri",
+    "/parfum",
+    "/kemer",
+    "/cuzdan",
+    "/sirt-cantasi",
+    "/canta-valiz",
+    "/kampanya/uzun-gunler",
+    "/kampanya/5-al-4-ode",
+    "/kampanya/yeni-sezon",
+    "/kampanya/aksesuar-20",
+    "/kampanya/flash-sale",
+    "/kampanya/mega-outlet",
+  ];
 
   const categoryData: Record<string, { label: string; href: string }[]> = {
     giyim: [
@@ -63,6 +95,14 @@ export default function Menu() {
     ],
   };
 
+  const handleLinkClick = (href: string) => {
+    if (existingRoutes.includes(href)) {
+      router.push(href);
+    } else {
+      router.push("/coming-soon");
+    }
+  };
+
   return (
     <>
       <div className="fixed inset-0 z-50 bg-white overflow-y-auto p-6">
@@ -102,7 +142,12 @@ export default function Menu() {
             <ul className="space-y-4 text-lg">
               {categoryData[activeCategory].map((item, index) => (
                 <li key={index}>
-                  <Link href={item.href}>{item.label}</Link>
+                  <button
+                    onClick={() => handleLinkClick(item.href)}
+                    className="text-left text-black hover:underline"
+                  >
+                    {item.label}
+                  </button>
                 </li>
               ))}
             </ul>

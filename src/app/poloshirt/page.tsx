@@ -7,44 +7,7 @@ import { Rate } from "antd";
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 import { useFavorites } from "@/components/Header&Footer/FavoritesContext";
 import Navigation from "@/components/Header&Footer/Navigation";
-
-type MenuItem = {
-  label: string;
-  href: string;
-};
-const menuItems = [
-  { label: "Yeni Sezon", href: "/" },
-  { label: "Giyim", href: "/giyim" },
-  { label: "Basic Tişört", href: "/basictshirt" },
-  { label: "Gömlek", href: "/shirt" },
-  { label: "Pantolon", href: "/trousers" },
-  { label: "Takım Elbise", href: "/suit" },
-  { label: "Polo Tişört", href: "/poloshirt" },
-  { label: "Her Daim Basic", href: "/her-daim-basic" },
-  { label: "Şort", href: "/sort" },
-  { label: "Mayo / Deniz Şortu", href: "/mayo-deniz-sortu" },
-  { label: "Klasik Takım Elbise", href: "/klasik-takim-elbise" },
-  { label: "Nano Takım Elbise", href: "/nano-takim-elbise" },
-  { label: "Yelekli Takım Elbise", href: "/yelekli-takim-elbise" },
-  { label: "Yelekli Takm Elbise", href: "/yelekli-takm-elbise" },
-  { label: "Sweatshirt", href: "/sweatshirt" },
-  { label: "Smokin / Damatlik", href: "/smokin-damatlik" },
-  { label: "Esofman", href: "/esofman" },
-  { label: "Triko / Kazak", href: "/triko-kazak" },
-  { label: "DIS Giyim", href: "/dis-giyim" },
-  { label: "Polar", href: "/polar" },
-  { label: "IQ Giyim", href: "/iq-giyim" },
-  { label: "Kadin Giyim", href: "/kadin-giyim" },
-  { label: "Online Exclusive", href: "/online-exclusive" },
-  { label: "Coklu Paket Urünler", href: "/coklu-paket-urunler" },
-  { label: "Ayakkabı", href: "/ayakkabi" },
-  { label: "Aksesuar", href: "/aksesuar" },
-  { label: "Kampanyalar", href: "/kampanyalar" },
-  { label: "AC x Burak ÖZGivit", href: "/ac-x-burak-ozgivit" },
-  { label: "Koleksiyon", href: "/koleksiyon" },
-  { label: "Mega Outlet", href: "/mega-outlet" },
-  { label: "AC Home", href: "/ac-home" },
-];
+import MenuSidebar from "@/components/MenuSidebar";
 
 const sortOptions = [
   { value: "0", label: "Editör Sıralaması" },
@@ -56,7 +19,10 @@ const sortOptions = [
 ];
 
 export default function ProductLayout() {
-  const [activeMenu, setActiveMenu] = useState(menuItems[0]);
+  const [activeMenu, setActiveMenu] = useState({
+    label: "Yeni Sezon",
+    href: "/",
+  });
   const [activeSort, setActiveSort] = useState(sortOptions[0].value);
   const [columns, setColumns] = useState(4);
   const { favorites, toggleFavorite } = useFavorites();
@@ -69,7 +35,8 @@ export default function ProductLayout() {
         return [...productpolo].sort((a, b) => b.price - a.price);
       case "15":
         return [...productpolo].sort(
-          (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+          (a, b) =>
+            new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
         );
       case "20":
         return [...productpolo].sort((a, b) => b.salesCount - a.salesCount);
@@ -89,24 +56,10 @@ export default function ProductLayout() {
       </p>
 
       <div className="min-h-screen flex font-sans text-gray-800">
-       <aside className="hidden lg:flex w-48 h-screen overflow-y-auto flex-col">
-          <nav className="flex flex-col mt-4 px-4 space-y-1">
-            {menuItems.map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                className={`py-3 px-4 rounded-lg text-left text-black text-sm ${
-                  activeMenu.href === item.href
-                    ? "underline font-semibold"
-                    : "hover:underline"
-                } transition`}
-                onClick={() => setActiveMenu(item)}
-              >
-                {item.label}
-              </Link>
-            ))}
-          </nav>
-        </aside>
+        <MenuSidebar
+          activeHref={activeMenu.href}
+          onChange={(item) => setActiveMenu(item)}
+        />
 
         <main className="flex-1 p-5 overflow-auto">
           <div className="px-2 pt-4 flex items-center gap-4">
@@ -181,11 +134,13 @@ export default function ProductLayout() {
                     />
                     <button
                       onClick={(e) => {
-                        e.preventDefault(); 
+                        e.preventDefault();
                         toggleFavorite(productpolo.id);
                       }}
                       className="absolute top-2 right-2 bg-white p-1 rounded-full shadow hover:bg-gray-100 transition z-10"
-                      aria-label={isFavorite ? "Favoritdən sil" : "Favoritə əlavə et"}
+                      aria-label={
+                        isFavorite ? "Favoritdən sil" : "Favoritə əlavə et"
+                      }
                     >
                       {isFavorite ? (
                         <AiFillHeart className="text-red-500 w-5 h-5" />
@@ -194,11 +149,12 @@ export default function ProductLayout() {
                       )}
                     </button>
 
-                    {productpolo.oldPrice && productpolo.oldPrice > productpolo.price && (
-                      <span className="absolute top-2 left-2 bg-red-500 text-white text-xs font-bold px-2 py-1 rounded">
-                        İndirim
-                      </span>
-                    )}
+                    {productpolo.oldPrice &&
+                      productpolo.oldPrice > productpolo.price && (
+                        <span className="absolute top-2 left-2 bg-red-500 text-white text-xs font-bold px-2 py-1 rounded">
+                          İndirim
+                        </span>
+                      )}
                   </div>
 
                   <div className="flex justify-center mt-2 space-x-2">
@@ -234,13 +190,14 @@ export default function ProductLayout() {
                           ? `$${productpolo.price.toFixed(2)}`
                           : "Fiyat Yok"}
                       </span>
-                      {productpolo.oldPrice && productpolo.oldPrice > productpolo.price && (
-                        <span className="text-gray-400 line-through">
-                          {typeof productpolo.oldPrice === "number"
-                            ? `$${productpolo.oldPrice.toFixed(2)}`
-                            : ""}
-                        </span>
-                      )}
+                      {productpolo.oldPrice &&
+                        productpolo.oldPrice > productpolo.price && (
+                          <span className="text-gray-400 line-through">
+                            {typeof productpolo.oldPrice === "number"
+                              ? `$${productpolo.oldPrice.toFixed(2)}`
+                              : ""}
+                          </span>
+                        )}
                     </div>
                   </div>
                 </Link>

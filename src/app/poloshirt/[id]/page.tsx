@@ -6,6 +6,7 @@ import { Rate } from "antd";
 import Header from "@/components/Header&Footer/Header";
 import { useCart } from "@/components/Header&Footer/CartContext";
 import Navigation from "@/components/Header&Footer/Navigation";
+import Footer from "@/components/Header&Footer/Footer";
 
 type Product = {
   title: string;
@@ -30,8 +31,8 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
     product.image2,
     product.image3,
   ].filter(Boolean);
-  const { addToCart } = useCart();
 
+  const { addToCart } = useCart();
   const [quantity, setQuantity] = useState(1);
 
   const handleAddToCart = () => {
@@ -50,14 +51,14 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
     <>
       <Header />
       <Navigation />
-      <div className="flex max-w-6xl mx-auto bg-white rounded-lg overflow-hidden h-full">
+      <div className="flex max-w-6xl mx-auto bg-white rounded-lg overflow-hidden h-full mt-6">
         <div className="w-1/2 p-4 grid grid-cols-2 gap-4">
           {images.map((img, index) => (
             <img
               key={index}
               src={img}
               alt={`product-${index}`}
-              className="w-full h-64 object-contain rounded bg-white"
+              className="w-full h-full object-contain rounded bg-white"
             />
           ))}
         </div>
@@ -111,8 +112,11 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
                 +
               </button>
             </div>
-              <p className="text-green-600 font-semibold mb-4 text-center">Sepette Az Öde</p>
-              
+
+            <p className="text-green-600 font-semibold mb-4 text-center">
+              Sepette Az Öde
+            </p>
+
             <div className="mb-4">
               <label className="block mb-1 font-medium">Beden Seçin</label>
               <select className="border border-gray-300 rounded px-3 py-2 w-full">
@@ -122,6 +126,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
                 ))}
               </select>
             </div>
+
             <button
               onClick={handleAddToCart}
               className="bg-black text-white py-3 rounded w-full hover:bg-gray-800 transition"
@@ -131,6 +136,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
           </div>
         </div>
       </div>
+      <Footer />
     </>
   );
 };

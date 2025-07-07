@@ -6,6 +6,7 @@ import { Rate } from "antd";
 import Header from "@/components/Header&Footer/Header";
 import { useCart } from "@/components/Header&Footer/CartContext";
 import Navigation from "@/components/Header&Footer/Navigation";
+import Footer from "@/components/Header&Footer/Footer";
 
 type Product = {
   title: string;
@@ -150,6 +151,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
           </div>
         </div>
       </div>
+      <Footer />
     </>
   );
 };
