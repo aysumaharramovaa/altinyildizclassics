@@ -6,6 +6,7 @@ import {
   FiEye,
   FiUser,
   FiShoppingBag,
+  FiX,
 } from "react-icons/fi";
 import Link from "next/link";
 import { useFavorites } from "@/components/Header&Footer/FavoritesContext";
@@ -61,77 +62,124 @@ export default function Header() {
   const { cart } = useCart();
   const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
 
+  const [showSearch, setShowSearch] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
+
+  const handleSearch = () => {
+    const trimmedQuery = searchQuery.trim();
+    if (!trimmedQuery) {
+      alert("Axtarış üçün bir söz yazın.");
+      return;
+    }
+    window.location.href = `/search?q=${encodeURIComponent(trimmedQuery)}`;
+  };
+
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") {
+      handleSearch();
+    }
+  };
+  
+
   return (
     <div>
-      {/* Header */}
       <header className="bg-white border-b">
         <div className="container mx-auto px-4 py-4">
-          <div className="flex items-center justify-between">
-            <Link href="/menu">
-              <button className="flex items-center gap-2 text-gray-700">
-                <MenuIcon size={20} />
-                <span className="text-sm font-medium">MENÜ</span>
-              </button>
-            </Link>
-            <Link href="/" passHref>
-              <div className="flex items-center gap-2">
-                <span className="text-base sm:text-lg md:text-xl lg:text-2xl font-bold tracking-wider">
-                  ALTINYILDIZ
-                </span>
-                <span className="text-base sm:text-lg md:text-xl lg:text-2xl">
-                  ★
-                </span>
-                <span className="text-base sm:text-lg md:text-xl lg:text-2xl font-bold tracking-wider">
-                  CLASSICS
-                </span>
+          {showSearch ? (
+            <div className="flex justify-center">
+              <div className="w-full max-w-4xl flex items-center border border-gray-300 rounded overflow-hidden">
+                  <FiSearch size={20} />
+                <input
+                  type="text"
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  onKeyDown={handleKeyDown}
+                  placeholder="Badic Tişört..."
+                  className="flex-grow px-4 py-2 text-lg outline-none"
+                  autoFocus
+                />
+                <button
+                  onClick={handleSearch}
+                  aria-label="Ara"
+                  className="bg-gray-200 hover:bg-gray-300 px-4 py-2 text-gray-700 font-medium flex items-center justify-center"
+                >
+                  Ara
+                </button>
               </div>
-            </Link>
-
-            <div className="flex items-center gap-2 md:gap-6">
-              <IconWithTooltip
-                Icon={FiSearch}
-                label="Ara"
-                size={isMobile ? 5 : 10}
-              />
-              <Link href="/favorites">
-                <IconWithTooltip
-                  Icon={FiHeart}
-                  label="Favorilerim"
-                  size={isMobile ? 5 : 10}
-                  badgeCount={favorites.length}
-                />
-              </Link>
-
-              <Link href="/myorders">
-                <IconWithTooltip
-                  Icon={FiEye}
-                  label="Siparişlerim"
-                  size={isMobile ? 5 : 10}
-                />
-              </Link>
-
-              <Link href="/login">
-                <IconWithTooltip
-                  Icon={FiUser}
-                  label="Hesabım"
-                  size={isMobile ? 5 : 10}
-                />
-              </Link>
-
-              <Link href="/basket">
-                <IconWithTooltip
-                  Icon={FiShoppingBag}
-                  label="Sebetim"
-                  badgeCount={totalItems}
-                  size={isMobile ? 5 : 10}
-                />
-              </Link>
             </div>
-          </div>
+          ) : (
+            <div className="flex items-center justify-between">
+              <Link href="/menu">
+                <button className="flex items-center gap-2 text-gray-700">
+                  <MenuIcon size={20} />
+                  <span className="text-sm font-medium">MENÜ</span>
+                </button>
+              </Link>
+
+              <Link href="/" passHref>
+                <div className="flex items-center gap-2 cursor-pointer">
+                  <span className="text-base sm:text-lg md:text-xl lg:text-2xl font-bold tracking-wider">
+                    ALTINYILDIZ
+                  </span>
+                  <span className="text-base sm:text-lg md:text-xl lg:text-2xl">
+                    ★
+                  </span>
+                  <span className="text-base sm:text-lg md:text-xl lg:text-2xl font-bold tracking-wider">
+                    CLASSICS
+                  </span>
+                </div>
+              </Link>
+
+              <div className="flex items-center gap-2 md:gap-6">
+                <button
+                  onClick={() => setShowSearch(true)}
+                  aria-label="Axtar"
+                  className="cursor-pointer"
+                >
+                  <FiSearch
+                    size={isMobile ? 5 : 10}
+                    className="text-gray-700"
+                  />
+                </button>
+
+                <Link href="/favorites">
+                  <IconWithTooltip
+                    Icon={FiHeart}
+                    label="Favorilerim"
+                    size={isMobile ? 5 : 10}
+                    badgeCount={favorites.length}
+                  />
+                </Link>
+
+                <Link href="/myorders">
+                  <IconWithTooltip
+                    Icon={FiEye}
+                    label="Siparişlerim"
+                    size={isMobile ? 5 : 10}
+                  />
+                </Link>
+
+                <Link href="/login">
+                  <IconWithTooltip
+                    Icon={FiUser}
+                    label="Hesabım"
+                    size={isMobile ? 5 : 10}
+                  />
+                </Link>
+
+                <Link href="/basket">
+                  <IconWithTooltip
+                    Icon={FiShoppingBag}
+                    label="Sebetim"
+                    badgeCount={totalItems}
+                    size={isMobile ? 5 : 10}
+                  />
+                </Link>
+              </div>
+            </div>
+          )}
         </div>
       </header>
-
-     
     </div>
   );
 }

@@ -24,25 +24,34 @@ export default function ProductLayout() {
   const [columns, setColumns] = useState(4);
   const { favorites, toggleFavorite } = useFavorites();
 
+  // Hər məhsul üçün seçilmiş şəkil indekslərini saxlayırıq
+  const [selectedImages, setSelectedImages] = useState<{ [key: string]: number }>({});
+
+  const handleMouseEnter = (productId: string, imageIndex: number) => {
+    setSelectedImages((prev) => ({
+      ...prev,
+      [productId]: imageIndex,
+    }));
+  };
+
   const sortedProducts = useMemo(() => {
-    switch (activeSort) {
-      case "10":
-        return [...products].sort((a, b) => a.price - b.price);
-      case "11":
-        return [...products].sort((a, b) => b.price - a.price);
-      case "15":
-        return [...products].sort(
-          (a, b) =>
-            new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
-        );
-      case "20":
-        return [...products].sort((a, b) => b.salesCount - a.salesCount);
-      case "25":
-        return [...products].sort((a, b) => b.ratingCount - a.ratingCount);
-      default:
-        return products;
-    }
-  }, [activeSort]);
+  switch (activeSort) {
+    case "10":
+      return [...products].sort((a, b) => a.price - b.price);
+    case "11":
+      return [...products].sort((a, b) => b.price - a.price);
+    case "15":
+      return [...products].sort(
+        (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+      );
+    case "20":
+      return [...products].sort((a, b) => b.salesCount - a.salesCount);
+    case "25":
+      return [...products].sort((a, b) => b.ratingCount - a.ratingCount);
+    default:
+      return products;
+  }
+}, [activeSort]);
 
   return (
     <>
@@ -54,10 +63,7 @@ export default function ProductLayout() {
       </p>
 
       <div className="min-h-screen flex font-sans text-gray-800">
-        <MenuSidebar
-          activeHref={activeMenu.href}
-          onChange={(item) => setActiveMenu(item)}
-        />
+        <MenuSidebar activeHref={activeMenu.href} onChange={(item) => setActiveMenu(item)} />
 
         <main className="flex-1 p-5 overflow-auto">
           <div className="px-2 pt-4 flex items-center gap-4">
@@ -81,6 +87,7 @@ export default function ProductLayout() {
                 ))}
               </select>
             </div>
+
             <div className="flex items-center gap-2 mt-6">
               {[2, 3, 4].map((num) => (
                 <button
@@ -114,7 +121,6 @@ export default function ProductLayout() {
                 product.image2,
                 product.image3,
               ];
-              
 
               const isFavorite = favorites.includes(product.id);
 
@@ -126,7 +132,7 @@ export default function ProductLayout() {
                 >
                   <div className="bg-white rounded-lg shadow-md overflow-hidden cursor-pointer hover:shadow-xl transition w-full h-60 relative">
                     <img
-                      src={images[0]}
+                      src={images[selectedImages[product.id] ?? 0]}
                       alt={product.title}
                       className="w-full h-full object-cover object-top rounded-t-lg transition-transform group-hover:scale-105"
                       loading="lazy"
@@ -137,9 +143,7 @@ export default function ProductLayout() {
                         toggleFavorite(product.id);
                       }}
                       className="absolute top-2 right-2 bg-white p-1 rounded-full shadow hover:bg-gray-100 transition z-10"
-                      aria-label={
-                        isFavorite ? "Favoritdən sil" : "Favoritə əlavə et"
-                      }
+                      aria-label={isFavorite ? "Favoritdən sil" : "Favoritə əlavə et"}
                     >
                       {isFavorite ? (
                         <AiFillHeart className="text-red-500 w-5 h-5" />
@@ -153,6 +157,20 @@ export default function ProductLayout() {
                         İndirim
                       </span>
                     )}
+                  </div>
+
+                  <div className="flex justify-center mt-2 space-x-2">
+                    {images.map((_, i) => (
+                      <div
+                        key={i}
+                        onMouseEnter={() => handleMouseEnter(product.id, i)}
+                        className={`h-1.5 w-6 rounded-full cursor-pointer transition-all ${
+                          selectedImages[product.id] === i
+                            ? "bg-black"
+                            : "bg-gray-300 hover:bg-gray-400"
+                        }`}
+                      />
+                    ))}
                   </div>
 
                   <div className="mt-3 p-3 rounded-b-lg">
