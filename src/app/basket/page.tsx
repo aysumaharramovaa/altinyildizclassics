@@ -63,10 +63,9 @@ export default function Sepet() {
                           <p className="text-sm text-gray-500">
                             Toplam: ₺{(price * quantity).toFixed(2)}
                           </p>
-                          {/* burda problem var aysu buna bax */}
                           {size && (
                             <p className="text-sm text-gray-500">
-                              Bədən ölçüsü:{" "}
+                              Beden :{" "}
                               <span className="font-medium">{size}</span>
                             </p>
                           )}

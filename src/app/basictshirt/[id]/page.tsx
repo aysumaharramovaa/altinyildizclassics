@@ -18,6 +18,7 @@ type Product = {
   image3?: string;
   ratingCount: number;
   id: number;
+  size?: string;
 };
 
 type ProductCardProps = {
@@ -32,16 +33,22 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
     product.image3,
   ].filter(Boolean);
   const { addToCart } = useCart();
+  const [size, setSize] = useState<string | null>(null);
 
   const [quantity, setQuantity] = useState(1);
-
   const handleAddToCart = () => {
+    if (!size) {
+      alert("Lütfen bedeninizi bulun");
+      return;
+    }
+
     addToCart(
       {
         id: product.id,
         title: product.title,
         price: product.price,
         image: product.image,
+        size: size,
       },
       quantity
     );
@@ -112,17 +119,26 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
                 +
               </button>
             </div>
-              <p className="text-green-600 font-semibold mb-4 text-center">Sepette Az Öde</p>
-              
+            <p className="text-green-600 font-semibold mb-4 text-center">
+              Sepette Az Öde
+            </p>
+
             <div className="mb-4">
               <label className="block mb-1 font-medium">Beden Seçin</label>
-              <select className="border border-gray-300 rounded px-3 py-2 w-full">
-                <option>Bedenimi Bul</option>
-                {[38, 40, 42, 44, 46, 48, 50, 52, 54].map((size) => (
-                  <option key={size}>{size}N</option>
+              <select
+                className="border border-gray-300 rounded px-3 py-2 w-full"
+                value={size || ""}
+                onChange={(e) => setSize(e.target.value)}
+              >
+                <option value="">Bedenimi Bul</option>
+                {[38, 40, 42, 44, 46, 48, 50, 52, 54].map((s) => (
+                  <option key={s} value={`${s}N`}>
+                    {s}
+                  </option>
                 ))}
               </select>
             </div>
+
             <button
               onClick={handleAddToCart}
               className="bg-black text-white py-3 rounded w-full hover:bg-gray-800 transition"

@@ -18,6 +18,7 @@ type Product = {
   image3?: string;
   ratingCount: number;
   id: number;
+  size?: string;
 };
 
 type ProductCardProps = {
@@ -32,20 +33,26 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
     product.image3,
   ].filter(Boolean);
   const { addToCart } = useCart();
-  const [size, setSize] = useState<string | null>(null);
-
-  const [quantity, setQuantity] = useState(1);
-  const handleAddToCart = () => {
-    addToCart(
-      {
-        id: product.id,
-        title: product.title,
-        price: product.price,
-        image: product.image,
-      },
-      quantity
-    );
-  };
+   const [size, setSize] = useState<string | null>(null);
+  
+    const [quantity, setQuantity] = useState(1);
+    const handleAddToCart = () => {
+      if (!size) {
+        alert("Lütfen bedeninizi bulun");
+        return;
+      }
+  
+      addToCart(
+        {
+          id: product.id,
+          title: product.title,
+          price: product.price,
+          image: product.image,
+          size: size,
+        },
+        quantity
+      );
+    };
 
   return (
     <>
@@ -113,8 +120,8 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
               >
                 <option value="">Bedenimi Bul</option>
                 {[38, 40, 42, 44, 46, 48, 50, 52, 54].map((s) => (
-                  <option key={s} value={`${s}N`}>
-                    {s}N
+                  <option key={s} value={`${s}`}>
+                    {s}
                   </option>
                 ))}
               </select>

@@ -18,6 +18,7 @@ type Product = {
   image3?: string;
   ratingCount: number;
   id: number;
+  size?: string;
 };
 
 type ProductCardProps = {
@@ -36,12 +37,18 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
 
   const [quantity, setQuantity] = useState(1);
   const handleAddToCart = () => {
+    if (!size) {
+      alert("Lütfen bedeninizi bulun");
+      return;
+    }
+
     addToCart(
       {
         id: product.id,
         title: product.title,
         price: product.price,
         image: product.image,
+        size: size,
       },
       quantity
     );
