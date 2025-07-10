@@ -33,58 +33,54 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
     product.image3,
   ].filter(Boolean);
   const { addToCart } = useCart();
-   const [size, setSize] = useState<string | null>(null);
-  
-    const [quantity, setQuantity] = useState(1);
-    const handleAddToCart = () => {
-      if (!size) {
-        alert("Lütfen bedeninizi bulun");
-        return;
-      }
-  
-      addToCart(
-        {
-          id: product.id,
-          title: product.title,
-          price: product.price,
-          image: product.image,
-          size: size,
-        },
-        quantity
-      );
-    };
+  const [size, setSize] = useState<string | null>(null);
+  const [quantity, setQuantity] = useState(1);
+
+  const handleAddToCart = () => {
+    if (!size) {
+      alert("Lütfen bedeninizi bulun");
+      return;
+    }
+
+    addToCart(
+      {
+        id: product.id,
+        title: product.title,
+        price: product.price,
+        image: product.image,
+        size: size,
+      },
+      quantity
+    );
+  };
 
   return (
     <>
       <Header />
       <Navigation />
 
-      <div className="flex max-w-6xl mx-auto bg-white rounded-lg overflow-hidden h-full">
-        <div className="w-1/2 p-4 grid grid-cols-2 gap-4">
+      <div className="flex flex-col md:flex-row max-w-6xl mx-auto bg-white rounded-lg overflow-hidden h-full">
+        <div className="md:w-1/2 w-full p-4 grid grid-cols-2 gap-4">
           {images.map((img, index) => (
             <img
               key={index}
               src={img}
               alt={`product-${index}`}
-              className="w-full h-180 object-cover rounded"
+              className="w-full h-48 md:h-100 object-cover rounded"
             />
           ))}
         </div>
 
-        <div className="w-1/2 p-8 flex flex-col justify-between">
+        <div className="md:w-1/2 w-full p-6 md:p-8 flex flex-col justify-between">
           <div>
             <h2 className="text-2xl font-semibold mb-3 text-center">
               {product.title}
             </h2>
-            <p className="text-gray-600 mb-1 text-center">Elbise</p>
+            <p className="text-gray-600 mb-1 text-center">Pantalon</p>
             <p className="text-gray-500 mb-4 text-center">ET3024200071LAC</p>
 
-            <div className="flex items-center gap-2 mb-4">
-              <Rate
-                allowHalf
-                disabled
-                defaultValue={product.ratingCount / 10}
-              />
+            <div className="flex items-center gap-2 mb-4 justify-center">
+              <Rate allowHalf disabled defaultValue={product.ratingCount / 10} />
               <span className="text-gray-600">
                 {product.ratingCount} Değerlendirme
               </span>
@@ -158,6 +154,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
           </div>
         </div>
       </div>
+
       <Footer />
     </>
   );

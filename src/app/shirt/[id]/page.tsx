@@ -58,8 +58,8 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
     <>
       <Header />
       <Navigation />
-      <div className="flex max-w-6xl mx-auto bg-white rounded-lg overflow-hidden h-full">
-        <div className="w-1/2 p-4 grid grid-cols-2 gap-4">
+       <div className="flex flex-col md:flex-row max-w-6xl mx-auto bg-white rounded-lg overflow-hidden h-full">
+        <div className="md:w-1/2 w-full p-4 grid grid-cols-2 gap-4">
           {images.map((img, index) => (
             <img
               key={index}
@@ -69,10 +69,10 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
             />
           ))}
         </div>
-        <div className="w-1/2 p-8 flex flex-col justify-between">
+        <div className="md:w-1/2 w-full p-6 md:p-8 flex flex-col justify-between">
           <div>
             <h2 className="text-2xl font-semibold mb-3 text-center">
-              {product.title}
+                {product.title}
             </h2>
             <p className="text-gray-600 mb-1 text-center">Gömlek</p>
 
