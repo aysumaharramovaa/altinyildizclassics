@@ -132,8 +132,8 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
               >
                 <option value="">Bedenimi Bul</option>
                 {[38, 40, 42, 44, 46, 48, 50, 52, 54].map((s) => (
-                  <option key={s} value={`${s}N`}>
-                    {s}N
+                  <option key={s} value={`${s}`}>
+                    {s}
                   </option>
                 ))}
               </select>
