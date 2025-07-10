@@ -5,9 +5,22 @@ import Header from "@/components/Header&Footer/Header";
 import Navigation from "@/components/Header&Footer/Navigation";
 import { ShoppingCart, Trash2 } from "lucide-react";
 import Link from "next/link";
+import React, { useState } from "react";
+import { useRouter } from "next/navigation";
 
 export default function Sepet() {
-  const { cart, removeFromCart, changeQuantity } = useCart();
+  const { cart, removeFromCart, changeQuantity, clearCart } = useCart();
+  const [showModal, setShowModal] = useState(false);
+  const router = useRouter();
+
+  const handlePayment = () => {
+    setShowModal(true);
+    setTimeout(() => {
+      setShowModal(false);
+      clearCart();
+      router.push("/");
+    }, 1000);
+  };
 
   const total = cart.reduce((acc, p) => acc + p.price * p.quantity, 0);
   const discount = total * 0.1;
@@ -114,7 +127,7 @@ export default function Sepet() {
               </div>
             )}
           </div>
-          
+
           {cart.length > 0 && (
             <div className="bg-white rounded-lg p-6 h-fit">
               <h2 className="text-xl font-semibold mb-4">Sipariş Özeti</h2>
@@ -141,7 +154,10 @@ export default function Sepet() {
                   <span>₺{finalTotal.toFixed(2)}</span>
                 </div>
 
-                <button className="mt-4 w-full bg-black text-white py-3 rounded hover:bg-gray-800 transition">
+                <button
+                  onClick={handlePayment}
+                  className="mt-4 w-full bg-black text-white py-3 rounded hover:bg-gray-800 transition"
+                >
                   Ödeme Yap
                 </button>
               </div>
@@ -149,6 +165,20 @@ export default function Sepet() {
           )}
         </div>
       </div>
+
+      {showModal && (
+        <div
+          className="fixed inset-0 flex items-center justify-center z-50"
+          style={{ backgroundColor: "rgba(0, 0, 0, 0.3)" }}
+        >
+          <div className="bg-white p-6 rounded-lg shadow-lg text-center">
+            <h2 className="text-xl font-semibold text-green-600">
+              ✅ Ödemeniz alındı!
+            </h2>
+            <p className="mt-2 text-gray-600">Teşekkür ederiz.</p>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

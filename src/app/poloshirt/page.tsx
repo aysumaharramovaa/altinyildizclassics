@@ -51,7 +51,7 @@ export default function ProductLayout() {
     <>
       <Header />
       <Navigation />
-      <p className="text-sm pl-5 text-gray-600 mt-1">
+      <p className="text-sm pl-5 text-gray-600 mt-1  pt-3">
         Ana Sayfa / Giyim / Polo Tişört
       </p>
 

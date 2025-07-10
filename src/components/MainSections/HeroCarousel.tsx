@@ -1,6 +1,5 @@
-"use client";
-
-import React, { useState } from "react";
+"use client"
+import React, { useState, useEffect } from "react";
 import { useKeenSlider } from "keen-slider/react";
 import "keen-slider/keen-slider.min.css";
 import { ChevronLeft, ChevronRight } from "lucide-react";
@@ -31,23 +30,31 @@ export function HeroCarousel() {
     },
   });
 
+  useEffect(() => {
+    const interval = setInterval(() => {
+      instanceRef.current?.next();
+    }, 3000); 
+
+    return () => clearInterval(interval);
+  }, [instanceRef]);
+
   const handleClick = () => {
     router.push("/suit");
   };
 
   return (
-    <div className="relative">
-      <div ref={sliderRef} className="keen-slider">
+    <div className="relative pt-3">
+      <div ref={sliderRef} className="keen-slider w-screen h-screen">
         {images.map((src, index) => (
           <div
             key={index}
-            className="keen-slider__slide relative cursor-pointer"
-            onClick={handleClick} 
+            className="keen-slider__slide relative cursor-pointer w-screen h-screen"
+            onClick={handleClick}
           >
             <img
               src={src}
               alt={`Hero ${index + 1}`}
-              className="w-full h-[500px] object-cover"
+             className="absolute inset-0 w-full h-full object-cover"
             />
           </div>
         ))}

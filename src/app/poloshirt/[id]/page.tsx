@@ -34,32 +34,33 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   ].filter(Boolean);
 
   const { addToCart } = useCart();
-  const [size, setSize] = useState<string | null>(null);
-
-  const [quantity, setQuantity] = useState(1);
-  const handleAddToCart = () => {
-    if (!size) {
-      alert("Lütfen bedeninizi bulun");
-      return;
-    }
-
-    addToCart(
-      {
-        id: product.id,
-        title: product.title,
-        price: product.price,
-        image: product.image,
-        size: size,
-      },
-      quantity
-    );
-  };
-
+    const [size, setSize] = useState<string | null>(null);
+    const [quantity, setQuantity] = useState(1);
+    const [error, setError] = useState(false);
+  
+    const handleAddToCart = () => {
+      if (!size) {
+        setError(true);
+        return;
+      }
+      setError(false);
+      addToCart(
+        {
+          id: product.id,
+          title: product.title,
+          price: product.price,
+          image: product.image,
+          size: size,
+        },
+        quantity
+      );
+    };
+    
   return (
     <>
       <Header />
       <Navigation />
-      <div className="flex flex-col md:flex-row max-w-6xl mx-auto bg-white rounded-lg overflow-hidden h-full">
+      <div className="flex flex-col md:flex-row max-w-6xl mx-auto bg-white rounded-lg overflow-hidden h-full pt-4">
         <div className="md:w-1/2 w-full p-4 grid grid-cols-2 gap-4">
            {images.map((img, index) => (
             <img
@@ -125,22 +126,31 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
               Sepette Az Öde
             </p>
 
-            <div className="mb-4">
-              <label className="block mb-1 font-medium">Beden Seçin</label>
-              <select
-                className="border border-gray-300 rounded px-3 py-2 w-full"
-                value={size || ""}
-                onChange={(e) => setSize(e.target.value)}
-              >
-                <option value="">Bedenimi Bul</option>
-                {[38, 40, 42, 44, 46, 48, 50, 52, 54].map((s) => (
-                  <option key={s} value={`${s}`}>
-                    {s}
-                  </option>
-                ))}
-              </select>
-            </div>
-
+           <div className="mb-4">
+        {error && (
+          <p className="text-red-600 font-semibold mb-1">
+            Lütfen bedeninizi seçin
+          </p>
+        )}
+        <label className="block mb-1 font-medium">Beden Seçin</label>
+        <select
+          className={`border rounded px-3 py-2 w-full ${
+            error ? "border-red-600" : "border-gray-300"
+          }`}
+          value={size || ""}
+          onChange={(e) => {
+            setSize(e.target.value);
+            if (error) setError(false);
+          }}
+        >
+          <option value="">Bedenimi Bul</option>
+          {[38, 40, 42, 44, 46, 48, 50, 52, 54].map((s) => (
+            <option key={s} value={`${s}`}>
+              {s}
+            </option>
+          ))}
+        </select>
+      </div>
             <button
               onClick={handleAddToCart}
               className="bg-black text-white py-3 rounded w-full hover:bg-gray-800 transition"
